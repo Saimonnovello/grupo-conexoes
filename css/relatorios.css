@@ -1,0 +1,17 @@
+* {
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+}
+
+@media (max-width: 768px){
+
+    .layout{
+        flex-direction: column;
+    }
+
+    .sidebar{
+        width: 100%;
+        height: auto;
+    }
+
+}

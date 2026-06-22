@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/novo-relatorio.css">
+
+</head>
+<body>
+
+    <aside class="sidebar">
+            <h2>Grupo de conexões</h2>
+        <ul>
+            <nav>
+            <li>  <a href="PAGINA-INICIO.HTML" class="active">Inicio</a></li>
+            <li>  <a href="novo-relatorio.html">Novo Relatorio</a></li>
+            <li>  <a href="relatorios.html">Relatorios</a></li>
+            <li id="menuUsuarios">
+            <a href="usuarios.html">Usuarios</a>
+            </li>
+            </nav>
+        </ul>
+            
+        </aside>
+
+            <div class="input-group">
+
+            <br>1 - Data de hoje?</br>
+
+                <input type="date" id="data_gc">
+            </div>
+
+<p>
+    2 - Quem é o coordenador?<br>
+
+    <input type="radio" name="coordenador" id="rafael">
+    <label for="rafael">Pastor Rafael e Sara</label><br>
+
+    <input type="radio" name="coordenador" id="giovani">
+    <label for="giovani">Pastor Giovani e Laisa</label><br>
+
+    <input type="radio" name="coordenador" id="paulo">
+    <label for="paulo">Pastor Paulo e Rose</label><br>
+    </p>
+
+<p>
+    <div class="input-group">
+   
+    3 - Quem é o líder?<br>
+
+        <input type="text"
+        placeholder="Digite sua resposta" id="lider">
+
+    </div>
+</p>
+
+<p>
+    <div class="input-group">
+
+    <label for="anfitrioes">4 - Quem são os anfitriões?</label><br>
+
+    <textarea id="anfitrioes"
+              name="anfitrioes"
+              placeholder="Digite sua resposta"></textarea>
+
+    </div>
+</p>
+
+<p>
+    <div class="input-group">
+
+    5 - Que horas os lideres chegaram?<br>
+
+        <label for="hora"></label>
+        <input type="time" id="horas_chegaram" name="hora">
+
+    </div>
+</p>
+
+<p>
+    <label for="casa"> 6 - Os líderes chegaram atrasados? Se sim, por quê?</label><br>
+    <textarea id="lideres_atrasados" name="casa"
+    placeholder="Digite sua resposta"></textarea>
+</p>
+
+<p>
+    <label for="casa"> 7 - Como estava a casa?</label><br>
+    <textarea id="como_casa" name="casa"
+    placeholder="Digite sua resposta"></textarea>
+</p>
+
+<p>
+    <label for="casa">8 - Como estava a família?</label><br>
+    <textarea id="estava_familia" name="casa"
+    placeholder="Digite sua resposta"></textarea>
+</p>
+
+<p>
+    <label for="hora">9 - Que horas iniciaram o GC?</label><br>
+    <input type="time" id="que_GC" name="horas">
+</p>
+
+<p>
+    <label for="hora">10 - Que horas começou a comunhão?</label><br>
+    <input type="time" id="que_comunhao" name="horas">
+</p>
+
+<p>
+    <label for="comunhão">11 - Como foi a comunhão?</label><br>
+    <textarea id="foi_comunhao" 
+    placeholder="Digite sua resposta"></textarea>
+</p>
+
+<p>
+    <label for="Quem">12 - Quem fez a oração?</label><br>
+    <input type="text" id="quem_oracao"
+    placeholder="Digite sua resposta">
+</p>
+
+<p>
+    <label for="leu">13 - Quem leu o Material?</label><br>
+    <input type="text" id="leu_material"
+    placeholder="Digite sua resposta">
+</p>
+
+<p>
+    <label for="começou">14 - Que horas começou a ministração?</label><br>
+    <input type="time" id="horas_ministracao" name="começou">
+</p>
+
+<p>
+    <label for="Noite?">15 - Ministro da Noite?</label><br>
+    <input type="text" id="Ministro_Noite"
+    placeholder="Digite sua resposta">
+</p>
+
+<p>
+    <label for="Como">16 - Como foi o ministro durante a ministração?</label><br>
+    <textarea id="Como_durante" 
+    placeholder="Digite sua resposta"></textarea>
+</p>
+
+<p>
+    <label for="Como">17 - Qual dinâmica quebra gelo foi feita?</label><br>
+    <textarea id="qual_gelo" 
+    placeholder="Digite sua resposta"></textarea>
+</p>
+
+<p>
+    <label for="Como">18 - Como foi a receptividade do tema?</label><br>
+    <textarea id="como_tema" 
+    placeholder="Digite sua resposta"></textarea>
+</p>
+    
+<p>
+    <label for="Qual">19 - Qual foi o horário da interação da Palavra?</label><br>
+    <input type="time" id="qual_interacao" name="Qual">
+</p>
+
+<p>
+    <label for="Que">20 - Que horas foi finalizado?</label><br>
+    <input type="time" id="Que_finalizado" name="Que">
+</p>
+
+<p>
+    <label for="liberada?">21 - Que horas a casa foi liberada?</label><br>
+    <input type="time" id="que_liberada" name="liberada?">
+</p>
+
+<p>
+    22 - Foi feito foto e vídeo?<br>
+
+    <input type="radio" name="foto_video" id="sim">
+    <label for="sim">Sim</label>
+
+    <input type="radio" name="foto_video" id="nao">
+    <label for="nao">Não</label>
+</p>
+
+<p>
+    <label for="Como"></label>23 - Quantos visitantes há hoje? * Nomes *<br>
+    <textarea id="quantos_hoje" 
+    placeholder="Digite sua resposta"></textarea>
+</p>
+
+<p>
+    <label for="membros">24 - Quantos membros fixos?</label><br>
+    <input type="number" placeholder="Digite a quantidade" id="quantos_fixos">
+</p>
+
+<p>
+    <label for="Como">25 - Quantos jovens? * Nomes *</label><br>
+    <textarea id="quantos_nomes" 
+    placeholder="Digite sua resposta"></textarea>
+</p>
+
+<p>
+    <label for="Como">26 - Quantas crianças? * Nomes *</label><br>
+    <textarea id="quantas_nomes" 
+    placeholder="Digite sua resposta"></textarea>
+</p>
+
+<p>
+    <label for="Como">27 - Quem faltou?</label><br>
+    <textarea id="quem_faltou" 
+    placeholder="Digite sua resposta"></textarea>
+</p>
+
+<p>
+    <label for="Como">28 - Porque faltou?</label><br>
+    <textarea id="porque_faltou" 
+    placeholder="Digite sua resposta"></textarea>
+</p>
+
+<p>
+    <label for="Como">29 - Observações.</label><br>
+    <textarea id="observacoes" 
+    placeholder="Digite sua resposta"></textarea>
+</p>
+
+<button type="button" onclick="salvarRelatorio()">
+    Salvar Relatório
+</button>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script src="js/supabase.js"></script>
+
+<script src="js/novo-relatorio.js"></script>    
+
+
+</body>
+</html>

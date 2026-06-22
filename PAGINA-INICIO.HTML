@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Painel</title>
+
+    <link rel="stylesheet" href="css/inicio.css">
+
+</head>
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+            <h1>Grupo de conexões</h1>
+        <ul>
+            <nav>
+            <li>  <a href="PAGINA-INICIO.HTML" class="active">Inicio</a></li>
+            <li>  <a href="novo-relatorio.html">Novo Relatorio</a></li>
+            <li>  <a href="relatorios.html">Relatorios</a></li>
+            
+            <li id="menuUsuarios">
+            <a href="usuarios.html">Usuários</a>
+            </li>
+            </nav>
+        </ul>
+        </aside>
+
+        <main class="content">
+            <h2>Visão Geral</h2>
+
+          <div class="card">
+            <h3>Total de Relatórios</h3>
+            <p id="totalRelatorios">0</p>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <script src="js/supabase.js"></script>
+
+    <script src="js/PAGINA-INICIO.JS"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <script src="js/permissoes.js"></script>
+    
+</body>
+</html>

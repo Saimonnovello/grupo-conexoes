@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Grupo de Conexões</title>
+
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <h1>Grupo de Conexões</h1>
+
+        <p>Faça login para continuar</p>
+
+        <div class="input-group">
+
+            <label>Usuário</label>
+
+            <input type="text"
+                   id="usuario"
+                   placeholder="Digite seu usuário">
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Senha</label>
+
+            <input type="password"
+                   id="senha"
+                   placeholder="Digite sua senha">
+
+        </div>
+
+        <button class="btn" onclick="entrar()">
+            Entrar
+        </button>
+
+        <div class="forgot">
+            Esqueci minha senha
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <script src="js/supabase.js"></script>
+
+    <script src="js/login.js"></script>
+
+</body>
+</html>

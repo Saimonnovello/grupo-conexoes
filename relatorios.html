@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatórios</title>
+
+    <link rel="stylesheet" href="css/relatorios.css">
+
+</head>
+<body>
+
+    <aside class="sidebar">
+            <h1>Grupo de conexões</h1>
+        <ul>
+            <nav>
+            <li>  <a href="PAGINA-INICIO.HTML" class="active">Inicio</a></li>
+            <li>  <a href="novo-relatorio.html">Novo Relatorio</a></li>
+            <li>  <a href="relatorios.html">Relatorios</a></li>
+            <li id="menuUsuarios">
+            <a href="usuarios.html">Usuarios</a>
+            </li>
+            </nav>
+        </ul>
+    </aside>
+
+<h1>Relatórios Salvos</h1>
+
+<table border="2">
+    <thead>
+        <tr>
+            
+            <th>Data</th>
+            <th>Coordenador</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody id="listaRelatorios">
+
+    </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/relatorios.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script src="js/supabase.js"></script>
+
+<script src="js/permissoes.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+*{
+    font-size:25px;
+}
+
+h2{
+    font-size:30px;
+}
+
+#anfitrioes {
+    width: 350px;
+    height: 30px;
+    resize: none;
+}
+
+textarea {
+    width: 500px;
+    height: 120px;
+    resize: none;
+}

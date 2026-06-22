@@ -1,0 +1,119 @@
+/*TELA DE LOGIN SÓ A ESCRITA*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    font-family:arial, sans-serif;
+    
+}
+
+/*CORPO DA PAGINA DE LOGIN*/
+body{
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(190deg,#1c045e,#0c0b1b);    
+}
+
+/* PARTE DO LOGIN BOX EDITAR O TAMANHO ETC..*/
+.login-box{
+    width:350px;
+    background:#585679;
+    padding:40px;
+    border-radius:20px;
+    box-shadow: 0 0 70px rgb(0, 0, 0);
+}
+
+/* GRUPO DE CONEXÕES ESCRITA NO LOGIN-BOX*/
+.login-box h1 {
+    text-align:center;
+    margin-bottom:10px;
+    font-size:50px;
+    color:rgb(255, 255, 255)
+}
+
+/* ( FAÇA LOGIN ) ESCRITA NO LOGIN BOX*/
+.login-box p{
+    text-align:center;
+    color:#ffffff;
+    margin-bottom:30px;
+}
+
+/* ESPAÇO ENTRE OBJETOS NA TELA DE LOGIN-BOX */
+.input-group{
+    margin-bottom:20px
+}
+
+/* USUARIO E SENHA DO LOGIN BOX ESCRITA E COR*/
+.input-group label{
+    display:rgb(255, 255, 255);
+    margin-bottom: 8px;
+    font-size:20px;
+    color: rgb(255, 255, 255);
+}
+
+/* CAMPO DE USUARIO E SENHA, EDITAR COR TAMANHO*/
+.input-group input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:15px;
+    background:#ffffff;
+    color:rgb(5, 4, 4);
+    
+}
+
+/*BOTÃO DE ENTRAR, COR TAMANHO */
+.btn{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:35px;
+    background: linear-gradient(90deg,rgb(6, 6, 10),rgb(2, 2, 2));
+    color:rgb(223, 223, 223);
+    font-size:19px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+/* ANIMAÇÃO NO BOTÃO DE ENTRAR NO LOGIN*/
+.btn:hover{
+    transform:scale(1.03);
+}
+
+/* (ESQUECI MINHA SENHA) ESCRITA COR ETC..*/
+.forgot{
+    margin-top:15px;
+    text-align:center;
+    font-size:14px;
+    color:#01f7ff;
+    cursor:pointer;
+}
+
+.input-group input:focus{
+    border:1px solid #00ffff;
+}
+
+@media(max-widht:400px){
+
+    .login-box{
+        width:90%;
+        padding:30px;
+    }
+}
+
+@media (max-width: 768px){
+
+    .layout{
+        flex-direction: column;
+    }
+
+    .sidebar{
+        width: 100%;
+        height: auto;
+    }
+
+}
+
