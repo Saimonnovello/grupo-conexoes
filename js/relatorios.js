@@ -39,3 +39,9 @@ function verRelatorio(id) {
 }
 
 carregarRelatorios();
+
+const tipo = localStorage.getItem("tipo");
+
+if (tipo !== "admin") {
+    document.getElementById("menuUsuarios").style.display = "none";
+}

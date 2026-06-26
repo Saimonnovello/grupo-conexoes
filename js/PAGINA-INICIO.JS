@@ -13,3 +13,9 @@ async function carregarTotalRelatorios() {
 }
 
 carregarTotalRelatorios();
+
+const tipoUsuario = localStorage.getItem("tipoUsuario");
+
+if (tipoUsuario !== "admin") {
+    document.getElementById("menuUsuarios").style.display = "none";
+}

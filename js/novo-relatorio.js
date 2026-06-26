@@ -102,3 +102,9 @@ async function salvarRelatorio() {
 
     location.reload();
 }
+
+const tipo = localStorage.getItem("tipo");
+
+if (tipo !== "admin") {
+    document.getElementById("menuUsuarios").style.display = "none";
+}
