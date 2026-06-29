@@ -11,32 +11,74 @@
 </head>
 <body>
 
+
     <div class="layout">
 
-        <aside class="sidebar">
-            <h1>Grupo de conexões</h1>
-        <ul>
-            <nav>
-            <li>  <a href="PAGINA-INICIO.HTML" class="active">Inicio</a></li>
-            <li>  <a href="novo-relatorio.html">Novo Relatorio</a></li>
-            <li>  <a href="relatorios.html">Relatorios</a></li>
-            
-            <li id="menuUsuarios">
-            <a href="usuarios.html">Usuários</a>
-            </li>
-            </nav>
-        </ul>
-        </aside>
+    <aside class="sidebar">
 
-        <main class="content">
-            <h2>Visão Geral</h2>
+        <div class="logo">
 
-          <div class="card">
-            <h3>Total de Relatórios</h3>
-            <p id="totalRelatorios">0</p>
+            <h2>Grupo de<br>Conexões</h2>
+
         </div>
 
-    </div>
+        <nav>
+
+            <a href="pagina-inicial.html" class="ativo">
+                🏠 Início
+            </a>
+
+            <a href="novo-relatorio.html">
+                📝 Novo Relatório
+            </a>
+
+            <a href="relatorios.html">
+                📋 Relatórios
+            </a>
+
+            <a href="usuarios.html" id="menuUsuarios">
+                👥 Usuários
+            </a>
+
+        </nav>
+
+        <div class="sair">
+
+            <a href="index.html">
+                🚪 Sair
+            </a>
+
+        </div>
+
+        <div class="perfil">
+
+            <div class="foto">
+                SN
+            </div>
+
+            <div>
+
+                <strong id="nomeUsuario">
+                    Saimon
+                </strong>
+
+                <p>Administrador</p>
+
+                <span class="online">
+                    Online
+                </span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <main class="content">
+
+    </main>
+
+</div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
