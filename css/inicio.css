@@ -610,4 +610,73 @@ body.dark .card h2{
 
 }
 
+.mobile-nav{
+
+    position:fixed;
+
+    bottom:0;
+
+    left:0;
+
+    width:100%;
+
+    height:70px;
+
+    background:#FFFFFF;
+
+    border-top:1px solid #E5E7EB;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    z-index:999;
+
+    transition:.3s;
+
+}
+
+.mobile-item{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    color:#64748B;
+
+    background:none;
+
+    border:none;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.mobile-item i{
+
+    font-size:22px;
+
+}
+
+.mobile-item span{
+
+    font-size:12px;
+
+}
+
+.mobile-item.ativo{
+
+    color:#2563EB;
+
+}
 
