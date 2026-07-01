@@ -443,3 +443,68 @@ body{
 }
 
 }
+
+.tema-btn{
+
+    width:50px;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:white;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.tema-btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+body.dark{
+
+    background:#0F172A;
+
+    color:white;
+
+}
+
+body.dark .sidebar{
+
+    background:#020617;
+
+}
+
+body.dark .card{
+
+    background:#1E293B;
+
+    color:white;
+
+}
+
+body.dark .content{
+
+    background:#0F172A;
+
+}
+
+body.dark .notificacao{
+
+    background:#1E293B;
+
+    color:white;
+
+}
+

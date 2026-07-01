@@ -19,3 +19,11 @@ const tipoUsuario = localStorage.getItem("tipoUsuario");
 if (tipoUsuario !== "admin") {
     document.getElementById("menuUsuarios").style.display = "none";
 }
+
+const temaBtn = document.getElementById("temaBtn");
+
+temaBtn.onclick = function(){
+
+    document.body.classList.toggle("dark");
+
+}
