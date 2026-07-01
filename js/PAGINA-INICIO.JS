@@ -51,3 +51,11 @@ temaBtn.onclick=function(){
     }
 
 }
+
+const tipo = localStorage.getItem("tipoUsuario");
+
+if(tipo !== "admin"){
+
+    document.getElementById("usuariosMobile").style.display="none";
+
+}
