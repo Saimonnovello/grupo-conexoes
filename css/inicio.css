@@ -502,7 +502,7 @@ body.dark .content{
 
 body.dark .notificacao{
 
-    background:#1E293B;
+    background:#f5f6f7;
 
     color:white;
 
@@ -528,4 +528,113 @@ body.dark .card h2{
     display: flex;
     align-items: center;
     gap: 15px;
+}
+
+.bottom-nav{
+
+    display:none;
+
+}
+
+@media (max-width:768px){
+
+.bottom-nav{
+
+    position:fixed;
+
+    bottom:15px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:92%;
+
+    height:75px;
+
+    background:#111827;
+
+    border-radius:25px;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    z-index:999;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+
+}
+
+.nav-item{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:13px;
+
+    gap:5px;
+
+}
+
+.nav-item i{
+
+    font-size:24px;
+
+}
+}
+
+.central{
+
+    width:65px;
+
+    height:65px;
+
+    background:#2563EB;
+
+    border-radius:50%;
+
+    margin-top:-35px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:0 10px 25px rgba(37,99,235,.45);
+
+}
+
+.central i{
+
+    font-size:30px;
+
+}
+
+.central span{
+
+    margin-top:8px;
+
+    font-size:12px;
+
+}
+
+@media(max-width:768px){
+
+.sidebar{
+
+    display:none;
+
+}
+
 }
