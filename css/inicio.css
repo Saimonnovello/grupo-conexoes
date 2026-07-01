@@ -22,7 +22,7 @@ body{
 
     width:270px;
 
-    background:#0F172A;
+    background:#192236;
 
     color:white;
 
@@ -45,7 +45,7 @@ body{
 .logo h2{
 
     font-size:32px;
-
+    color:white;
     line-height:40px;
 
 }
@@ -482,7 +482,7 @@ body.dark{
 
 body.dark .sidebar{
 
-    background:#020617;
+    background:#050c2b;
 
 }
 
@@ -608,7 +608,7 @@ body.dark .card h2{
 
 }
 
-}
+
 
 .mobile-nav{
 
@@ -636,6 +636,7 @@ body.dark .card h2{
 
     transition:.3s;
 
+}
 }
 
 .mobile-item{
