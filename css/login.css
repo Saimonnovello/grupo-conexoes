@@ -13,13 +13,13 @@ body{
     display:flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(190deg,#1c045e,#0c0b1b);    
+    background: linear-gradient(190deg,#0f172a,#0e0e20);    
 }
 
 /* PARTE DO LOGIN BOX EDITAR O TAMANHO ETC..*/
 .login-box{
     width:350px;
-    background:#585679;
+    background:#383858;
     padding:40px;
     border-radius:20px;
     box-shadow: 0 0 70px rgb(0, 0, 0);

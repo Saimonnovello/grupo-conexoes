@@ -20,7 +20,7 @@ if (tipoUsuario !== "admin") {
     document.getElementById("menuUsuarios").style.display = "none";
 }
 
-const temaBtn = document.getElementById("temaBtn");
+const temaBtn = document.querySelector(".tema-btn");
 
 temaBtn.onclick = function(){
 

@@ -508,3 +508,24 @@ body.dark .notificacao{
 
 }
 
+body.dark .topo h1{
+    color: #FFFFFF;
+}
+
+body.dark .topo p{
+    color: #CBD5E1;
+}
+
+body.dark .card p{
+    color: #E2E8F0;
+}
+
+body.dark .card h2{
+    color: #FFFFFF;
+}
+
+.acoes-topo{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
