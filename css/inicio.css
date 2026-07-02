@@ -665,21 +665,25 @@ body.dark .card h2{
     }
 
     /* Cabeçalho */
-    .topo{
-        display:flex;
-        flex-direction:column;
-        margin-bottom:25px;
-    }
+   .topo{
+    display:flex;
+    flex-direction:column;
+}
 
-    /* Botões no canto superior direito */
-    .acoes-topo{
-        width:100%;
-        display:flex;
-        justify-content:flex-end;
-        gap:10px;
-        margin-bottom:20px;
-    }
+.titulo{
+    order:2;
+}
 
+.acoes-topo{
+    order:1;
+
+    display:flex;
+    justify-content:flex-end;
+
+    width:100%;
+
+    margin-bottom:20px;
+}
     /* Título */
     .titulo h1{
         font-size:32px;
