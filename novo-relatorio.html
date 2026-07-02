@@ -222,10 +222,28 @@
     placeholder="Digite sua resposta"></textarea>
 </p>
 
-<button type="button" onclick="salvarRelatorio()">
+
+
+<div class="input-group">
+
+    <label>Status do relatório:</label><br>
+
+    <select id="status">
+
+        <option value="Concluído">🟢 Concluído</option>
+
+        <option value="Pendente">🟡 Pendente</option>
+
+    </select>
+    
+</div>
+
+
+<p>
+<button type="button" onclick="salvarRelatorio()"> 
     Salvar Relatório
 </button>
-
+</p>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
 <script src="js/supabase.js"></script>

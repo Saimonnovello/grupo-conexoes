@@ -77,6 +77,7 @@ async function salvarRelatorio() {
         quem_faltou: document.getElementById("quem_faltou").value,
         porque_faltou: document.getElementById("porque_faltou").value,
         observacoes: document.getElementById("observacoes").value
+        
     };
 
     console.log("Enviando:", respostas);
@@ -87,7 +88,8 @@ async function salvarRelatorio() {
             {
                 data_gc: document.getElementById("data_gc").value,
                 coordenador: coordenador,
-                respostas: respostas
+                respostas: respostas,
+                status: document.getElementById("status").value
             }
         ]);
 

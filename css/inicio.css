@@ -736,3 +736,123 @@ body.dark .card h2{
 
 }
 
+.status-concluido{
+
+    background:#DCFCE7;
+
+    color:#15803D;
+
+}
+
+.status-pendente{
+
+    background:#FEF3C7;
+
+    color:#B45309;
+
+}
+
+.ultimos-relatorios{
+
+    margin-top:35px;
+    background:#FFF;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.ultimos-relatorios h2{
+
+    margin-bottom:20px;
+    color:#111827;
+    font-size:24px;
+
+}
+
+.ultimos-relatorios table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+.ultimos-relatorios th{
+
+    padding:18px 25px;
+    text-align:left;
+    background:#F3F4F6;
+    color:#374151;
+    font-size:16px;
+
+}
+
+.ultimos-relatorios td{
+
+    padding:18px 25px;
+    border-bottom:1px solid #E5E7EB;
+    font-size:15px;
+
+}
+
+.ultimos-relatorios tr:hover{
+
+    background:#F8FAFC;
+
+}
+
+
+@media (max-width: 768px){
+
+    .ultimos-relatorios{
+        display: none;
+    }
+
+}
+
+/* ===== TABELA - MODO ESCURO ===== */
+
+body.dark .ultimos-relatorios{
+
+    background:#1E293B;
+
+}
+
+body.dark .ultimos-relatorios h2{
+
+    color:#FFFFFF;
+
+}
+
+body.dark .ultimos-relatorios th{
+
+    background:#334155;
+
+    color:#FFFFFF;
+
+}
+
+body.dark .ultimos-relatorios td{
+
+    color:#E2E8F0;
+
+    border-bottom:1px solid #475569;
+
+}
+
+body.dark .ultimos-relatorios tr:hover{
+
+    background:#2D3748;
+
+}
+
+.sidebar{
+
+    position: sticky;
+
+    top: 0;
+
+    height: 100vh;
+
+}
+

@@ -16,17 +16,23 @@ carregarTotalRelatorios();
 
 const tipoUsuario = localStorage.getItem("tipoUsuario");
 
+const menuDesktop = document.getElementById("menuUsuarios");
+const menuMobile = document.getElementById("usuariosMobile");
+
 if (tipoUsuario !== "admin") {
-    document.getElementById("menuUsuarios").style.display = "none";
+
+    if (menuDesktop) {
+        menuDesktop.style.display = "none";
+    }
+
+    if (menuMobile) {
+        menuMobile.style.display = "none";
+    }
+
 }
 
 const temaBtn = document.querySelector(".tema-btn");
 
-temaBtn.onclick = function(){
-
-    document.body.classList.toggle("dark");
-
-}
 
 const tema = localStorage.getItem("tema");
 
@@ -52,10 +58,44 @@ temaBtn.onclick=function(){
 
 }
 
-const tipo = localStorage.getItem("tipoUsuario");
 
-if(tipo !== "admin"){
 
-    document.getElementById("usuariosMobile").style.display="none";
+
+async function carregarUltimosRelatorios() {
+
+    const { data, error } = await supabaseClient
+        .from("relatorios")
+        .select("data_gc, coordenador, status")
+        .order("data_gc", { ascending: false });
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    const tabela = document.getElementById("listaInicio");
+
+    tabela.innerHTML = "";
+
+    data.forEach(relatorio => {
+
+        const status = relatorio.status === "Pendente"
+            ? '<span class="status-pendente">🟡 Pendente</span>'
+            : '<span class="status-concluido">🟢 Concluído</span>';
+
+        tabela.innerHTML += `
+            <tr>
+                <td>${relatorio.data_gc}</td>
+                <td>${relatorio.coordenador}</td>
+                <td>${status}</td>
+                <td>
+                    
+                </td>
+            </tr>
+        `;
+
+    });
 
 }
+
+carregarUltimosRelatorios();
