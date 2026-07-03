@@ -14,6 +14,11 @@ async function carregarTotalRelatorios() {
 
 carregarTotalRelatorios();
 
+
+// ==========================
+// PERMISSÕES
+// ==========================
+
 const tipoUsuario = localStorage.getItem("tipoUsuario");
 
 const menuDesktop = document.getElementById("menuUsuarios");
@@ -31,42 +36,43 @@ if (tipoUsuario !== "admin") {
 
 }
 
-const temaBtn = document.querySelector(".tema-btn");
 
+// ==========================
+// MODO ESCURO
+// ==========================
+
+const temaBtn = document.querySelector(".tema-btn");
 
 const tema = localStorage.getItem("tema");
 
-if(tema==="dark"){
-
+if (tema === "dark") {
     document.body.classList.add("dark");
-
 }
 
-temaBtn.onclick=function(){
+temaBtn.onclick = function () {
 
     document.body.classList.toggle("dark");
 
-    if(document.body.classList.contains("dark")){
-
-        localStorage.setItem("tema","dark");
-
-    }else{
-
-        localStorage.setItem("tema","light");
-
+    if (document.body.classList.contains("dark")) {
+        localStorage.setItem("tema", "dark");
+    } else {
+        localStorage.setItem("tema", "light");
     }
 
-}
+};
 
 
-
+// ==========================
+// ÚLTIMOS RELATÓRIOS
+// ==========================
 
 async function carregarUltimosRelatorios() {
 
     const { data, error } = await supabaseClient
         .from("relatorios")
-        .select("data_gc, coordenador, status")
-        .order("data_gc", { ascending: false });
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(3);
 
     if (error) {
         console.error(error);
@@ -74,10 +80,12 @@ async function carregarUltimosRelatorios() {
     }
 
     const tabela = document.getElementById("listaInicio");
-
     tabela.innerHTML = "";
 
     data.forEach(relatorio => {
+
+        const [ano, mes, dia] = relatorio.data_gc.split("-");
+        const dataBR = `${dia}/${mes}/${ano}`;
 
         const status = relatorio.status === "Pendente"
             ? '<span class="status-pendente">🟡 Pendente</span>'
@@ -85,17 +93,12 @@ async function carregarUltimosRelatorios() {
 
         tabela.innerHTML += `
             <tr>
-                <td>${relatorio.data_gc}</td>
+                <td>${dataBR}</td>
                 <td>${relatorio.coordenador}</td>
                 <td>${status}</td>
-                <td>
-                    
-                </td>
             </tr>
         `;
-
     });
-
 }
 
 carregarUltimosRelatorios();
