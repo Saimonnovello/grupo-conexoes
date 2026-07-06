@@ -22,7 +22,7 @@ body{
 
     width:270px;
 
-    background:#192236;
+    background:#e2e2e2;
 
     color:white;
 
@@ -45,7 +45,7 @@ body{
 .logo h2{
 
     font-size:32px;
-    color:white;
+    color:rgb(255, 255, 255);
     line-height:40px;
 
 }
@@ -856,3 +856,60 @@ body.dark .ultimos-relatorios tr:hover{
 
 }
 
+
+
+/* ========================= */
+/* SIDEBAR MODO CLARO */
+/* ========================= */
+
+body:not(.dark) .sidebar{
+
+    background: #F3F4F6;
+    border-right: 1px solid #D1D5DB;
+
+}
+
+body:not(.dark) .sidebar h2{
+
+    color: #111827;
+
+}
+
+body:not(.dark) .sidebar nav a{
+
+    color: #111827;
+
+}
+
+body:not(.dark) .sidebar nav a:hover{
+
+    background: #E5E7EB;
+
+}
+
+
+
+body:not(.dark) .sidebar .sair a{
+
+    color: #111827;
+
+}
+
+body:not(.dark) .perfil strong,
+body:not(.dark) .perfil p{
+
+    color: #111827;
+
+}
+
+body:not(.dark) .online{
+
+    color: white;
+
+}
+
+.logo a{
+    pointer-events: none;
+    text-decoration: none;
+    color: inherit;
+}
