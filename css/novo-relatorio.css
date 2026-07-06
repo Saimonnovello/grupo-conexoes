@@ -14,7 +14,7 @@ body{
 
     font-size:28px;
     margin-bottom:15px;
-    color:#fff;
+    color:#ffffff;
 
 }
 
@@ -28,7 +28,7 @@ body{
 
     font-size:18px;
     font-weight:600;
-    color:#fff;
+    color:#ffffff;
 }
 
 
@@ -37,7 +37,7 @@ body{
 .formulario-relatorio p,
 .formulario-relatorio .input-group{
 
-    margin-bottom:35px;
+    margin-bottom:30px;
 
 }
 
@@ -46,7 +46,7 @@ body{
 .formulario-relatorio label{
 
     display:block;
-    font-size:22px;
+    font-size:24px;
     font-weight:600;
     margin-bottom:12px;
 
@@ -60,7 +60,7 @@ body{
 .formulario-relatorio select{
 
     width:85%;
-    max-width:400px;
+    max-width:600px;
     height:52px;
     font-size:18px;
 
@@ -150,5 +150,58 @@ body{
         margin-right:8px;
 
     }
+
+}
+
+
+
+/* ========================= */
+/* PERGUNTAS - MODO CLARO */
+/* ========================= */
+
+body:not(.dark) .pergunta h3{
+
+    color:#111827;
+
+}
+
+body:not(.dark) .pergunta{
+
+    color:#111827;
+
+}
+
+/* Títulos das perguntas */
+
+.titulo-pergunta{
+
+    color:#111827;
+    font-size:22px;
+    margin-bottom:12px;
+
+}
+
+/* Modo escuro */
+
+body.dark .titulo-pergunta{
+
+    color:#FFFFFF;
+
+}
+
+
+/* Pergunta 2 - Labels dos rádios */
+
+body:not(.dark) .pergunta input[type="radio"] + label,
+body:not(.dark) .input-group input[type="radio"] + label{
+
+    color:#111827 !important;
+
+}
+
+body.dark .pergunta input[type="radio"] + label,
+body.dark .input-group input[type="radio"] + label{
+
+    color:#FFFFFF !important;
 
 }
