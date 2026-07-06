@@ -6,26 +6,111 @@
     
     <title>Document</title>
 
-    <link rel="stylesheet" href="css/novo-relatorio.css">
+  <link rel="stylesheet" href="css/inicio.css">
+
+<link rel="stylesheet" href="css/novo-relatorio.css">
+
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 <body>
 
-    <aside class="sidebar">
-            <h2>Grupo de conexões</h2>
-        <ul>
-            <nav>
-            <li>  <a href="PAGINA-INICIO.HTML" class="active">Inicio</a></li>
-            <li>  <a href="novo-relatorio.html">Novo Relatorio</a></li>
-            <li>  <a href="relatorios.html">Relatorios</a></li>
+<div class="layout">
 
-        
-            <a href="usuarios.html" id="menuUsuarios">Usuarios</a>
-        
-            </nav>
-        </ul>
-            
-        </aside>
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>Grupo de Conexões</h2>
+
+        </div>
+
+        <nav>
+
+            <a href="PAGINA-INICIO.HTML">
+                🏠 Início
+            </a>
+
+            <a href="novo-relatorio.html" class="ativo">
+                📝 Novo Relatório
+            </a>
+
+            <a href="relatorios.html">
+                📋 Relatórios
+            </a>
+
+            <a href="usuarios.html" id="menuUsuarios">
+                👥 Usuários
+            </a>
+
+        </nav>
+
+        <div class="sair">
+
+            <a href="index.html">
+                🚪 Sair
+            </a>
+
+        </div>
+
+        <div class="perfil">
+
+            <div class="foto">
+                SN
+            </div>
+
+            <div>
+
+                <strong id="nomeUsuario">
+                    Saimon
+                </strong>
+
+                <p>Administrador</p>
+
+                <span class="online">
+                    Online
+                </span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <main class="content">
+
+        <div class="topo">
+
+            <div class="titulo">
+
+                <h1>Novo Relatório</h1>
+
+                <p>Preencha todas as informações do Grupo de Conexões.</p>
+
+            </div>
+
+            <div class="acoes-topo">
+
+                <button id="tema-btn" class="tema-btn">
+
+                    <i class="fa-solid fa-moon"></i>
+
+                </button>
+
+                <button class="notificacao">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="badge">0</span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <section class="formulario-relatorio">
 
             <div class="input-group">
 
@@ -244,11 +329,72 @@
     Salvar Relatório
 </button>
 </p>
+
+        </section>
+
+    </main>
+
+</div>
+
+<nav class="mobile-nav">
+
+    <a href="PAGINA-INICIO.HTML" class="mobile-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Início</span>
+    </a>
+
+    <a href="relatorios.html" class="mobile-item">
+        <i class="fa-regular fa-file-lines"></i>
+        <span>Relatórios</span>
+    </a>
+
+    <a href="novo-relatorio.html" class="mobile-item ativo">
+        <i class="fa-solid fa-circle-plus"></i>
+        <span>Novo</span>
+    </a>
+
+    <a href="usuarios.html"
+       class="mobile-item"
+       id="usuariosMobile">
+
+        <i class="fa-solid fa-users"></i>
+        <span>Usuários</span>
+
+    </a>
+
+</nav>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
 <script src="js/supabase.js"></script>
 
 <script src="js/novo-relatorio.js"></script>    
+
+
+<script>
+
+const temaBtn = document.querySelector(".tema-btn");
+
+const tema = localStorage.getItem("tema");
+
+if(tema==="dark"){
+    document.body.classList.add("dark");
+}
+
+temaBtn.onclick = function(){
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+        localStorage.setItem("tema","dark");
+    }else{
+        localStorage.setItem("tema","light");
+    }
+
+}
+
+</script>
 
 
 </body>
