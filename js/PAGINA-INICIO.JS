@@ -102,3 +102,84 @@ async function carregarUltimosRelatorios() {
 }
 
 carregarUltimosRelatorios();
+
+const sino = document.querySelector(".notificacao");
+const painel = document.getElementById("painelNotificacoes");
+
+sino.onclick = () => {
+
+    painel.classList.toggle("ativo");
+
+}
+
+
+
+async function carregarNotificacoes(){
+
+    const { data, error } = await supabaseClient
+        .from("relatorios")
+        .select("status, coordenador, created_at")
+        .order("created_at",{ascending:false})
+        .limit(20);
+
+    if(error){
+        console.log(error);
+        return;
+    }
+
+    document.getElementById("badgeNotificacao").textContent = data.length;
+
+    const lista = document.getElementById("listaNotificacoes");
+
+    lista.innerHTML = "";
+
+    data.forEach(relatorio=>{
+
+        const minutos = Math.floor(
+            (Date.now() - new Date(relatorio.created_at)) / 60000
+        );
+
+        lista.innerHTML += `
+            <div class="item-notificacao">
+
+                <strong>
+                    ${relatorio.status=="Pendente" ? "🟡" : "🟢"}
+                    ${relatorio.status}
+                </strong>
+
+                <div>${relatorio.coordenador}</div>
+
+                <span>há ${minutos} minuto(s)</span>
+
+            </div>
+        `;
+
+    });
+
+}
+
+
+
+
+supabaseClient
+.channel("notificacoes")
+
+.on(
+    "postgres_changes",
+    {
+        event:"INSERT",
+        schema:"public",
+        table:"relatorios"
+    },
+
+    payload=>{
+
+        carregarNotificacoes();
+
+    }
+
+)
+
+.subscribe();
+
+carregarNotificacoes();
