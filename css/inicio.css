@@ -1298,3 +1298,13 @@ body.dark .notificacao-item span{
     }
 
 }
+
+
+.acoes-topo{
+
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:15px;
+
+}

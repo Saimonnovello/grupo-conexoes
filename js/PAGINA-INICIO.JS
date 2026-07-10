@@ -105,12 +105,22 @@ carregarUltimosRelatorios();
 
 const sino = document.querySelector(".notificacao");
 const painel = document.getElementById("painelNotificacoes");
+const badge = document.getElementById("badgeNotificacao");
+
+// Ao entrar na página considera as notificações como lidas
+badge.style.display = "none";
+localStorage.setItem("notificacoesLidas", "sim");
 
 sino.onclick = () => {
 
     painel.classList.toggle("ativo");
 
+    badge.style.display = "none";
+
+    localStorage.setItem("notificacoesLidas","sim");
+
 }
+
 
 
 
@@ -135,9 +145,7 @@ async function carregarNotificacoes(){
 
     data.forEach(relatorio=>{
 
-        const minutos = Math.floor(
-            (Date.now() - new Date(relatorio.created_at)) / 60000
-        );
+      const tempo = tempoDecorrido(relatorio.created_at);
 
         lista.innerHTML += `
             <div class="item-notificacao">
@@ -149,7 +157,7 @@ async function carregarNotificacoes(){
 
                 <div>${relatorio.coordenador}</div>
 
-                <span>há ${minutos} minuto(s)</span>
+                <span>${tempo}</span>
 
             </div>
         `;
@@ -162,17 +170,22 @@ async function carregarNotificacoes(){
 
 
 supabaseClient
-.channel("notificacoes")
+.channel("dashboard")
 
 .on(
     "postgres_changes",
     {
-        event:"INSERT",
-        schema:"public",
-        table:"relatorios"
+        event: "*",
+        schema: "public",
+        table: "relatorios"
     },
+    () => {
 
-    payload=>{
+        carregarTotalRelatorios();
+
+        carregarUltimosRelatorios();
+
+        carregarPendentes();
 
         carregarNotificacoes();
 
@@ -182,4 +195,144 @@ supabaseClient
 
 .subscribe();
 
+
+function tempoDecorrido(data) {
+
+    const agora = new Date();
+    const criado = new Date(data);
+
+    const segundos = Math.floor((agora - criado) / 1000);
+
+    if (segundos < 60)
+        return "Agora";
+
+    const minutos = Math.floor(segundos / 60);
+
+    if (minutos < 60)
+        return `há ${minutos} min`;
+
+    const horas = Math.floor(minutos / 60);
+
+    if (horas < 24)
+        return `há ${horas} hora${horas > 1 ? "s" : ""}`;
+
+    const dias = Math.floor(horas / 24);
+
+    if (dias < 30)
+        return `há ${dias} dia${dias > 1 ? "s" : ""}`;
+
+    const meses = Math.floor(dias / 30);
+
+    if (meses < 12)
+        return `há ${meses} mês${meses > 1 ? "es" : ""}`;
+
+    const anos = Math.floor(meses / 12);
+
+    return `há ${anos} ano${anos > 1 ? "s" : ""}`;
+
+}
+
+
+
+
+
 carregarNotificacoes();
+
+
+async function carregarPendentes() {
+
+    const { count, error } = await supabaseClient
+        .from("relatorios")
+        .select("*", { count: "exact", head: true })
+        .eq("status", "Pendente");
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    document.getElementById("pendentes").textContent = count;
+
+}
+
+
+carregarPendentes();
+
+
+supabaseClient
+.channel("dashboard")
+
+.on(
+    "postgres_changes",
+    {
+        event: "INSERT",
+        schema: "public",
+        table: "relatorios"
+    },
+    () => {
+
+        carregarTotalRelatorios();
+
+        carregarUltimosRelatorios();
+
+        carregarPendentes();
+
+        carregarNotificacoes();
+
+        badge.style.display = "flex";
+
+        localStorage.setItem("notificacoesLidas", "nao");
+
+    }
+
+)
+
+.subscribe();
+
+
+if(localStorage.getItem("notificacoesLidas") == "sim"){
+
+    badge.style.display = "none";
+
+}else{
+
+    badge.style.display = "flex";
+
+}
+
+
+
+
+supabaseClient
+.channel("dashboard")
+
+.on(
+    "postgres_changes",
+    {
+        event:"INSERT",
+        schema:"public",
+        table:"relatorios"
+    },
+    ()=>{
+
+        carregarTotalRelatorios();
+        carregarUltimosRelatorios();
+        carregarPendentes();
+        carregarNotificacoes();
+
+        badge.style.display="flex";
+
+        localStorage.setItem("notificacoesLidas","nao");
+
+    }
+)
+
+.subscribe();
+
+
+
+window.addEventListener("beforeunload", () => {
+
+    localStorage.setItem("notificacoesLidas","sim");
+
+});

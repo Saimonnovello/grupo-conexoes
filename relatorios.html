@@ -1,57 +1,140 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Relatórios</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="css/relatorios.css">
-
-    <a href="relatorios.html" class="mobile-item ativo"></a>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatórios</title>
+<link rel="stylesheet" href="css/inicio.css">
+<link rel="stylesheet" href="css/relatorios.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
 
-    <aside class="sidebar">
-            <h1>Grupo de conexões</h1>
-        <ul>
-            <nav>
-            <li>  <a href="PAGINA-INICIO.HTML" class="active">Inicio</a></li>
-            <li>  <a href="novo-relatorio.html">Novo Relatorio</a></li>
-            <li>  <a href="relatorios.html">Relatorios</a></li>
-            
-            <a href="usuarios.html" id="menuUsuarios">Usuarios</a>
-            
-            </nav>
-        </ul>
-    </aside>
+<div class="layout">
 
-<h1>Relatórios Salvos</h1>
+<aside class="sidebar">
+<div class="logo"><h2>Grupo de Conexões</h2></div>  
 
-<table border="2">
-    <thead>
-        <tr>
-            
-            <th>Data</th>
-            <th>Coordenador</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
+<nav>
+<a href="PAGINA-INICIO.HTML">🏠 Início</a>
+<a href="novo-relatorio.html">📝 Novo Relatório</a>
+<a href="relatorios.html" class="ativo">📋 Relatórios</a>
+<a href="usuarios.html" id="menuUsuarios">👥 Usuários</a>
+</nav>
 
-    <tbody id="listaRelatorios">
+<div class="sair"><a href="index.html">🚪 Sair</a></div>
 
-    </tbody>
+<div class="perfil">
+<div class="foto">SN</div>
+<div>
+<strong id="nomeUsuario">Saimon</strong>
+<p>Administrador</p>
+<span class="online">Online</span>
+</div>
+</div>
+</aside>
+
+<main class="content">
+
+<div class="topo">
+<div class="titulo">
+<h1>Relatórios</h1>
+<p>Visualize todos os relatórios cadastrados.</p>
+</div>
+
+<div class="acoes-topo">
+<button id="tema-btn" class="tema-btn">
+<i class="fa-solid fa-moon"></i>
+</button>
+</div>
+</div>
+
+<section class="ultimos-relatorios">
+<h2>Relatórios Salvos</h2>
+
+<div class="table-box">
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Coordenador</th>
+<th>Status</th>
+<th>Ações</th>
+</tr>
+</thead>
+
+<tbody id="listaRelatorios">
+</tbody>
+
 </table>
+</div>
+</section>
+
+</main>
+</div>
+
+<nav class="mobile-nav">
+<a href="PAGINA-INICIO.HTML" class="mobile-item">
+<i class="fa-solid fa-house"></i>
+<span>Início</span>
+</a>
+
+<a href="relatorios.html" class="mobile-item ativo">
+<i class="fa-regular fa-file-lines"></i>
+<span>Relatórios</span>
+</a>
+
+<a href="novo-relatorio.html" class="mobile-item">
+<i class="fa-solid fa-circle-plus"></i>
+<span>Novo</span>
+</a>
+
+<a href="usuarios.html" class="mobile-item" id="usuariosMobile">
+<i class="fa-solid fa-users"></i>
+<span>Usuários</span>
+</a>
+</nav>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script src="js/supabase.js"></script>
 <script src="js/relatorios.js"></script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-<script src="js/supabase.js"></script>
-
 <script src="js/permissoes.js"></script>
+<script src="js/menu.js"></script>
+
+
+
+
+<script>
+
+const temaBtn = document.querySelector(".tema-btn");
+
+const tema = localStorage.getItem("tema");
+
+if (tema === "dark") {
+    document.body.classList.add("dark");
+}
+
+temaBtn.onclick = function () {
+
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+
+        localStorage.setItem("tema","dark");
+
+    } else {
+
+        localStorage.setItem("tema","light");
+
+    }
+
+}
+
+</script>
+
+
+
+
+
 </body>
 </html>

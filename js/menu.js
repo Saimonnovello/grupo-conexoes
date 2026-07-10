@@ -1,9 +1,12 @@
 const botao = document.querySelector(".menu-mobile");
-
 const sidebar = document.querySelector(".sidebar");
 
-botao.addEventListener("click", ()=>{
+if (botao && sidebar) {
 
-    sidebar.classList.toggle("ativo");
+    botao.addEventListener("click", () => {
 
-});
+        sidebar.classList.toggle("ativo");
+
+    });
+
+}
