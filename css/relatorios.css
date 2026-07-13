@@ -125,3 +125,51 @@
     background:#D97706;
 
 }
+
+
+
+
+.pagina-relatorios{
+
+    margin-top:35px;
+    background:#FFF;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+body.dark .pagina-relatorios{
+
+    background:#1E293B;
+
+}
+
+body.dark .pagina-relatorios h2{
+
+    color:#FFFFFF;
+
+}
+
+
+.pagina-relatorios{
+
+    margin-top:35px;
+    background:#FFF;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+body.dark .pagina-relatorios{
+
+    background:#1E293B;
+
+}
+
+body.dark .pagina-relatorios h2{
+
+    color:#FFFFFF;
+
+}
