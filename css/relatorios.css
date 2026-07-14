@@ -173,3 +173,142 @@ body.dark .pagina-relatorios h2{
     color:#FFFFFF;
 
 }
+
+
+
+
+
+/* ===== TABELA RELATÓRIOS ===== */
+
+.table-box{
+    width:100%;
+    overflow-x:auto;
+}
+
+.table-box table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:850px;
+}
+
+.table-box th{
+    padding:18px;
+    text-align:left;
+    background:#334155;
+    color:#FFF;
+    font-size:18px;
+}
+
+.table-box td{
+    padding:18px;
+    border-bottom:1px solid #475569;
+    color:inherit;
+    white-space:nowrap;
+}
+
+.table-box tr:hover{
+    background:rgba(255,255,255,.03);
+}
+
+.btn-ver{
+    background:#2563EB;
+    color:#FFF;
+    border:none;
+    padding:8px 16px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.btn-editar{
+    background:#F59E0B;
+    color:#FFF;
+    border:none;
+    padding:8px 16px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-left:8px;
+}
+
+@media(max-width:768px){
+
+    .table-box{
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .table-box table{
+        min-width:900px;
+    }
+
+}
+
+
+
+
+.cards-relatorios{
+
+    display:none;
+
+}
+
+.card-relatorio{
+
+    background:#FFFFFF;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:18px;
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+
+}
+
+.card-relatorio h3{
+
+    margin-bottom:15px;
+    color:#2563EB;
+    font-size:20px;
+
+}
+
+.card-relatorio p{
+
+    margin:10px 0;
+    font-size:16px;
+
+}
+
+.card-acoes{
+
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+
+}
+
+body.dark .card-relatorio{
+
+    background:#1E293B;
+    color:#FFF;
+
+}
+
+body.dark .card-relatorio h3{
+
+    color:#60A5FA;
+
+}
+
+@media(max-width:768px){
+
+    .table-box{
+
+        display:none;
+
+    }
+
+    .cards-relatorios{
+
+        display:block;
+
+    }
+
+}

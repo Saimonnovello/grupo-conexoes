@@ -736,19 +736,35 @@ body.dark .card h2{
 
 }
 
-.status-concluido{
+.status-pendente{
 
-    background:#DCFCE7;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
 
-    color:#15803D;
+    color:#FACC15;
+    background:transparent;
+
+    font-weight:600;
+    font-size:15px;
+
+    padding:0;
 
 }
 
-.status-pendente{
+.status-concluido{
 
-    background:#FEF3C7;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
 
-    color:#B45309;
+    color:#22C55E;
+    background:transparent;
+
+    font-weight:600;
+    font-size:15px;
+
+    padding:0;
 
 }
 
