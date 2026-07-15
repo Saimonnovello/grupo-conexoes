@@ -259,35 +259,7 @@ async function carregarPendentes() {
 carregarPendentes();
 
 
-supabaseClient
-.channel("dashboard")
 
-.on(
-    "postgres_changes",
-    {
-        event: "INSERT",
-        schema: "public",
-        table: "relatorios"
-    },
-    () => {
-
-        carregarTotalRelatorios();
-
-        carregarUltimosRelatorios();
-
-        carregarPendentes();
-
-        carregarNotificacoes();
-
-        badge.style.display = "flex";
-
-        localStorage.setItem("notificacoesLidas", "nao");
-
-    }
-
-)
-
-.subscribe();
 
 
 if(localStorage.getItem("notificacoesLidas") == "sim"){
@@ -303,31 +275,7 @@ if(localStorage.getItem("notificacoesLidas") == "sim"){
 
 
 
-supabaseClient
-.channel("dashboard")
 
-.on(
-    "postgres_changes",
-    {
-        event:"INSERT",
-        schema:"public",
-        table:"relatorios"
-    },
-    ()=>{
-
-        carregarTotalRelatorios();
-        carregarUltimosRelatorios();
-        carregarPendentes();
-        carregarNotificacoes();
-
-        badge.style.display="flex";
-
-        localStorage.setItem("notificacoesLidas","nao");
-
-    }
-)
-
-.subscribe();
 
 
 
@@ -336,3 +284,50 @@ window.addEventListener("beforeunload", () => {
     localStorage.setItem("notificacoesLidas","sim");
 
 });
+
+
+
+
+
+async function carregarRelatoriosMes() {
+
+    const hoje = new Date();
+
+    const mesAtual = hoje.getMonth() + 1;
+    const anoAtual = hoje.getFullYear();
+
+    console.log("Mês atual:", mesAtual);
+    console.log("Ano atual:", anoAtual);
+
+    const { data, error } = await supabaseClient
+        .from("relatorios")
+        .select("data_gc");
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    console.log(data);
+
+    let total = 0;
+
+    data.forEach(relatorio => {
+
+        const [ano, mes] = relatorio.data_gc.split("-").map(Number);
+
+        console.log(relatorio.data_gc, ano, mes);
+
+        if (ano === anoAtual && mes === mesAtual) {
+            total++;
+        }
+
+    });
+
+    console.log("Total:", total);
+
+    document.getElementById("relatoriosMes").textContent = total;
+
+}
+
+carregarRelatoriosMes();

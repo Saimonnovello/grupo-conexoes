@@ -745,8 +745,8 @@ body.dark .card h2{
     color:#FACC15;
     background:transparent;
 
-    font-weight:600;
-    font-size:15px;
+    font-weight:900;
+    font-size:19px;
 
     padding:0;
 
@@ -758,11 +758,11 @@ body.dark .card h2{
     align-items:center;
     gap:6px;
 
-    color:#22C55E;
+    color:#00ff00;
     background:transparent;
 
-    font-weight:600;
-    font-size:15px;
+    font-weight:900;
+    font-size:19px;
 
     padding:0;
 
