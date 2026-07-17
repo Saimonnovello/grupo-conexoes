@@ -2,28 +2,57 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Visualizar Relatório</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="stylesheet" href="css/ver-relatorios.css">
-
+<title>Visualizar Relatório</title>
+<link rel="stylesheet" href="css/inicio.css">
+<link rel="stylesheet" href="css/ver-relatorio.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+.detalhes-card{background:#fff;border-radius:20px;padding:30px;box-shadow:0 10px 25px rgba(0,0,0,.08)}
+body.dark .detalhes-card{background:#1E293B;color:#fff}
+@media(max-width:768px){.sidebar{display:none}.content{padding:15px 15px 90px}}
+</style>
 </head>
 <body>
-
-<h1>Detalhes do Relatório</h1>
-
+<div class="layout">
+<aside class="sidebar">
+<div class="logo"><h2>Grupo de Conexões</h2></div>
+<nav>
+<a href="PAGINA-INICIO.HTML">🏠 Início</a>
+<a href="novo-relatorio.html">📝 Novo Relatório</a>
+<a href="relatorios.html" class="ativo">📋 Relatórios</a>
+<a href="usuarios.html" id="menuUsuarios">👥 Usuários</a>
+</nav>
+<div class="sair"><a href="index.html">🚪 Sair</a></div>
+</aside>
+<main class="content">
+<div class="topo"><div class="titulo"><h1>Detalhes do Relatório</h1><p>Visualize todas as respostas cadastradas.</p></div></div>
+<section class="detalhes-card">
 <div id="dadosRelatorio"></div>
+</section>
+</main>
+</div>
+<nav class="mobile-nav">
+<a href="PAGINA-INICIO.HTML" class="mobile-item"><i class="fa-solid fa-house"></i><span>Início</span></a>
+<a href="relatorios.html" class="mobile-item ativo"><i class="fa-regular fa-file-lines"></i><span>Relatórios</span></a>
+<a href="novo-relatorio.html" class="mobile-item"><i class="fa-solid fa-circle-plus"></i><span>Novo</span></a>
+<a href="usuarios.html" class="mobile-item" id="usuariosMobile"><i class="fa-solid fa-users"></i><span>Usuários</span></a>
+</nav>
+
+<script>
+
+const tema = localStorage.getItem("tema");
+
+if(tema === "dark"){
+    document.body.classList.add("dark");
+}
+
+</script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script src="js/supabase.js"></script>
 <script src="js/ver-relatorio.js"></script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-<script src="js/supabase.js"></script>
-
 <script src="js/permissoes.js"></script>
-
-</body>
-</html>
+<script src="js/menu.js"></script>
+</body></html>

@@ -21,64 +21,158 @@ async function carregarRelatorio() {
     const dataBR = `${dia}/${mes}/${ano}`;
 
     div.innerHTML = `
-    <h2>Data: ${dataBR}</h2>
-    <h3>Coordenador: ${data.coordenador}</h3>
+    <div class="info-relatorio">
+
+        <h2>📅 ${dataBR}</h2>
+
+        <h3>👤 ${data.coordenador}</h3>
+
+    </div>
 
 <hr>
 
-<p><strong>3 - Quem é o líder?</strong><br>${r.lider}</p>
+<hr>
 
-<p><strong>4 - Quem são os anfitriões?</strong><br>${r.anfitrioes}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">👤 3 - Quem é o líder?</div>
+    <div class="resposta">${r.lider || "-"}</div>
+</div>
 
-<p><strong>5 - Que horas os líderes chegaram?</strong><br>${r.horas_chegaram}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🏠 4 - Quem são os anfitriões?</div>
+    <div class="resposta">${r.anfitrioes || "-"}</div>
+</div>
 
-<p><strong>6 - Os líderes chegaram atrasados?</strong><br>${r.lideres_atrasados}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🕒 5 - Que horas os líderes chegaram?</div>
+    <div class="resposta">${r.horas_chegaram || "-"}</div>
+</div>
 
-<p><strong>7 - Como estava a casa?</strong><br>${r.como_casa}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">⏰ 6 - Os líderes chegaram atrasados?</div>
+    <div class="resposta">${r.lideres_atrasados || "-"}</div>
+</div>
 
-<p><strong>8 - Como estava a família?</strong><br>${r.estava_familia}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🏡 7 - Como estava a casa?</div>
+    <div class="resposta">${r.como_casa || "-"}</div>
+</div>
 
-<p><strong>9 - Que horas iniciaram o GC?</strong><br>${r.que_GC}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">👨‍👩‍👧‍👦 8 - Como estava a família?</div>
+    <div class="resposta">${r.estava_familia || "-"}</div>
+</div>
 
-<p><strong>10 - Que horas começou a comunhão?</strong><br>${r.que_comunhao}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🕗 9 - Que horas iniciaram o GC?</div>
+    <div class="resposta">${r.que_GC || "-"}</div>
+</div>
 
-<p><strong>11 - Como foi a comunhão?</strong><br>${r.foi_comunhao}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🍞 10 - Que horas começou a comunhão?</div>
+    <div class="resposta">${r.que_comunhao || "-"}</div>
+</div>
 
-<p><strong>12 - Quem fez a oração?</strong><br>${r.quem_oracao}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🙏 11 - Como foi a comunhão?</div>
+    <div class="resposta">${r.foi_comunhao || "-"}</div>
+</div>
 
-<p><strong>13 - Quem leu o material?</strong><br>${r.leu_material}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🙌 12 - Quem fez a oração?</div>
+    <div class="resposta">${r.quem_oracao || "-"}</div>
+</div>
 
-<p><strong>14 - Que horas começou a ministração?</strong><br>${r.horas_ministracao}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">📖 13 - Quem leu o material?</div>
+    <div class="resposta">${r.leu_material || "-"}</div>
+</div>
 
-<p><strong>15 - Ministro da noite?</strong><br>${r.ministro_noite}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🎤 14 - Que horas começou a ministração?</div>
+    <div class="resposta">${r.horas_ministracao || "-"}</div>
+</div>
 
-<p><strong>16 - Como foi o ministro durante a ministração?</strong><br>${r.como_durante}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🎙️ 15 - Ministro da noite?</div>
+    <div class="resposta">${r.ministro_noite || "-"}</div>
+</div>
 
-<p><strong>17 - Qual dinâmica quebra-gelo foi feita?</strong><br>${r.qual_gelo}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">✨ 16 - Como foi o ministro durante a ministração?</div>
+    <div class="resposta">${r.como_durante || "-"}</div>
+</div>
 
-<p><strong>18 - Como foi a receptividade do tema?</strong><br>${r.como_tema}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🎯 17 - Qual dinâmica quebra-gelo foi feita?</div>
+    <div class="resposta">${r.qual_gelo || "-"}</div>
+</div>
 
-<p><strong>19 - Qual foi o horário da interação da Palavra?</strong><br>${r.qual_interacao}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">💬 18 - Como foi a receptividade do tema?</div>
+    <div class="resposta">${r.como_tema || "-"}</div>
+</div>
 
-<p><strong>20 - Que horas foi finalizado?</strong><br>${r.que_finalizado}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">📚 19 - Qual foi o horário da interação da Palavra?</div>
+    <div class="resposta">${r.qual_interacao || "-"}</div>
+</div>
 
-<p><strong>21 - Que horas a casa foi liberada?</strong><br>${r.que_liberada}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">✅ 20 - Que horas foi finalizado?</div>
+    <div class="resposta">${r.que_finalizado || "-"}</div>
+</div>
 
-<p><strong>22 - Foi feito foto e vídeo?</strong><br>${r.foto_video}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🚪 21 - Que horas a casa foi liberada?</div>
+    <div class="resposta">${r.que_liberada || "-"}</div>
+</div>
 
-<p><strong>23 - Quantos visitantes houve?</strong><br>${r.quantos_hoje}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">📷 22 - Foi feito foto e vídeo?</div>
+    <div class="resposta">${r.foto_video || "-"}</div>
+</div>
 
-<p><strong>24 - Quantos membros fixos?</strong><br>${r.quantos_fixos}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🙋 23 - Quantos visitantes houve?</div>
+    <div class="resposta">${r.quantos_hoje || "-"}</div>
+</div>
 
-<p><strong>25 - Quantos jovens?</strong><br>${r.quantos_nomes}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">👥 24 - Quantos membros fixos?</div>
+    <div class="resposta">${r.quantos_fixos || "-"}</div>
+</div>
 
-<p><strong>26 - Quantas crianças?</strong><br>${r.quantas_nomes}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🧑‍🤝‍🧑 25 - Quantos jovens?</div>
+    <div class="resposta">${r.quantos_nomes || "-"}</div>
+</div>
 
-<p><strong>27 - Quem faltou?</strong><br>${r.quem_faltou}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">🧒 26 - Quantas crianças?</div>
+    <div class="resposta">${r.quantas_nomes || "-"}</div>
+</div>
 
-<p><strong>28 - Por que faltou?</strong><br>${r.porque_faltou}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">❌ 27 - Quem faltou?</div>
+    <div class="resposta">${r.quem_faltou || "-"}</div>
+</div>
 
-<p><strong>29 - Observações</strong><br>${r.observacoes}</p>
+<div class="pergunta">
+    <div class="titulo-pergunta">❓ 28 - Por que faltou?</div>
+    <div class="resposta">${r.porque_faltou || "-"}</div>
+</div>
+
+<div class="pergunta">
+    <div class="titulo-pergunta">📝 29 - Observações</div>
+    <div class="resposta">${r.observacoes || "-"}</div>
+</div>
 `;
 }
 carregarRelatorio();
+
+
+
+
+
+

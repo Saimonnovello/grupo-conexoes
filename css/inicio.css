@@ -935,21 +935,25 @@ body:not(.dark) .online{
 
     position:absolute;
 
-    top:75px;
+    top:70px;
 
-    right:20px;
+    right:0;
 
-    width:340px;
+    width:360px;
+
+    max-height:420px;
 
     background:white;
 
     border-radius:18px;
 
-    box-shadow:0 10px 35px rgba(0,0,0,.15);
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
 
     display:none;
-
-    overflow:hidden;
 
     z-index:999;
 
@@ -961,13 +965,7 @@ body:not(.dark) .online{
 
 }
 
-.notificacao-item{
 
-    padding:15px;
-
-    border-bottom:1px solid #E5E7EB;
-
-}
 
 .notificacao-item:last-child{
 
@@ -1052,27 +1050,24 @@ body.dark .item-notificacao{
 
 
 
-/* ========================= */
-/* PAINEL DE NOTIFICAÇÕES */
-/* ========================= */
+/* ===========================
+   PAINEL DE NOTIFICAÇÕES
+=========================== */
 
-.notificacao-box{
+.painel-notificacoes{
 
     position:absolute;
-    top:65px;
+    top:70px;
     right:0;
 
-    width:340px;
-
-    max-height:420px;
-
-    overflow-y:auto;
+    width:360px;
+    height:420px;
 
     background:#FFF;
 
     border-radius:18px;
 
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
 
     display:none;
 
@@ -1080,51 +1075,58 @@ body.dark .item-notificacao{
 
 }
 
-.notificacao-box.abrir{
-    display:block;
+.painel-notificacoes.ativo{
+
+    display:flex;
+    flex-direction:column;
+
 }
 
-.notificacao-header{
+.painel-notificacoes h3{
 
     padding:18px;
 
     font-size:20px;
 
-    font-weight:bold;
+    border-bottom:1px solid #E5E7EB;
+
+    background:white;
+
+    flex-shrink:0;
+
+}
+
+#listaNotificacoes{
+
+    flex:1;
+
+    overflow-y:auto;
+
+}
+
+.item-notificacao{
+
+    padding:16px 18px;
 
     border-bottom:1px solid #E5E7EB;
 
 }
 
-.notificacao-item{
+.item-notificacao:last-child{
 
-    padding:16px 18px;
-
-    border-bottom:1px solid #F1F5F9;
-
-    cursor:pointer;
-
-    transition:.2s;
+    border:none;
 
 }
 
-.notificacao-item:hover{
-
-    background:#F8FAFC;
-
-}
-
-.notificacao-item strong{
+.item-notificacao strong{
 
     display:block;
-
-    font-size:17px;
 
     margin-bottom:6px;
 
 }
 
-.notificacao-item span{
+.item-notificacao span{
 
     color:#64748B;
 
@@ -1132,13 +1134,35 @@ body.dark .item-notificacao{
 
 }
 
-body.dark .notificacao-box{
+
+/* Barra de rolagem */
+
+#listaNotificacoes::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+#listaNotificacoes::-webkit-scrollbar-thumb{
+
+    background:#CBD5E1;
+
+    border-radius:20px;
+
+}
+
+
+/* Tema escuro */
+
+body.dark .painel-notificacoes{
 
     background:#1E293B;
 
 }
 
-body.dark .notificacao-header{
+body.dark .painel-notificacoes h3{
+
+    background:#1E293B;
 
     color:white;
 
@@ -1146,30 +1170,34 @@ body.dark .notificacao-header{
 
 }
 
-body.dark .notificacao-item{
+body.dark .item-notificacao{
 
     border-color:#334155;
 
 }
 
-body.dark .notificacao-item:hover{
-
-    background:#334155;
-
-}
-
-body.dark .notificacao-item strong{
-
-    color:white;
-
-}
-
-body.dark .notificacao-item span{
+body.dark .item-notificacao span{
 
     color:#CBD5E1;
 
 }
 
+
+/* Celular */
+
+@media(max-width:768px){
+
+    .painel-notificacoes{
+
+        width:95%;
+        left:2.5%;
+        right:2.5%;
+        top:65px;
+        height:70vh;
+
+    }
+
+}
 
 
 /* ========================= */
@@ -1322,5 +1350,303 @@ body.dark .notificacao-item span{
     justify-content:flex-end;
     align-items:center;
     gap:15px;
+
+}
+
+
+.painel-notificacoes.ativo{
+
+    display:block;
+
+}
+
+.painel-notificacoes h3{
+
+    position:sticky;
+
+    top:0;
+
+    background:white;
+
+    padding:18px;
+
+    font-size:20px;
+
+    border-bottom:1px solid #E5E7EB;
+
+    z-index:2;
+
+}
+
+
+
+
+
+.item-notificacao{
+
+    padding:16px 18px;
+
+    border-bottom:1px solid #E5E7EB;
+
+    transition:.3s;
+
+}
+
+.item-notificacao:hover{
+
+    background:#F8FAFC;
+
+}
+
+.item-notificacao strong{
+
+    display:block;
+
+    margin-bottom:6px;
+
+}
+
+.item-notificacao span{
+
+    color:#64748B;
+
+    font-size:14px;
+
+}
+
+
+
+
+
+.painel-notificacoes::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.painel-notificacoes::-webkit-scrollbar-thumb{
+
+    background:#CBD5E1;
+
+    border-radius:20px;
+
+}
+
+.painel-notificacoes::-webkit-scrollbar-thumb:hover{
+
+    background:#94A3B8;
+
+}
+
+
+
+
+
+
+body.dark .painel-notificacoes{
+
+    background:#1E293B;
+
+}
+
+body.dark .painel-notificacoes h3{
+
+    background:#1E293B;
+
+    color:white;
+
+    border-bottom:1px solid #334155;
+
+}
+
+body.dark .item-notificacao{
+
+    border-bottom:1px solid #334155;
+
+}
+
+body.dark .item-notificacao:hover{
+
+    background:#273449;
+
+}
+
+body.dark .item-notificacao span{
+
+    color:#CBD5E1;
+
+}
+
+
+
+
+@media(max-width:768px){
+
+    .painel-notificacoes{
+
+        width:95%;
+
+        right:2.5%;
+
+        left:2.5%;
+
+        top:65px;
+
+        max-height:65vh;
+
+    }
+
+}
+
+
+
+
+
+/* ===========================
+   PAINEL DE NOTIFICAÇÕES
+=========================== */
+
+.painel-notificacoes{
+
+    position:absolute;
+    top:70px;
+    right:0;
+
+    width:360px;
+    height:420px;
+
+    background:#FFF;
+
+    border-radius:18px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+    display:none;
+
+    z-index:9999;
+
+}
+
+.painel-notificacoes.ativo{
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+.painel-notificacoes h3{
+
+    padding:18px;
+
+    font-size:20px;
+
+    border-bottom:1px solid #E5E7EB;
+
+    background:white;
+
+    flex-shrink:0;
+
+}
+
+#listaNotificacoes{
+
+    flex:1;
+
+    overflow-y:auto;
+
+}
+
+.item-notificacao{
+
+    padding:16px 18px;
+
+    border-bottom:1px solid #E5E7EB;
+
+}
+
+.item-notificacao:last-child{
+
+    border:none;
+
+}
+
+.item-notificacao strong{
+
+    display:block;
+
+    margin-bottom:6px;
+
+}
+
+.item-notificacao span{
+
+    color:#64748B;
+
+    font-size:14px;
+
+}
+
+
+/* Barra de rolagem */
+
+#listaNotificacoes::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+#listaNotificacoes::-webkit-scrollbar-thumb{
+
+    background:#CBD5E1;
+
+    border-radius:20px;
+
+}
+
+
+/* Tema escuro */
+
+body.dark .painel-notificacoes{
+
+    background:#1E293B;
+
+}
+
+body.dark .painel-notificacoes h3{
+
+    background:#1E293B;
+
+    color:white;
+
+    border-color:#334155;
+
+}
+
+body.dark .item-notificacao{
+
+    border-color:#334155;
+
+}
+
+body.dark .item-notificacao span{
+
+    color:#CBD5E1;
+
+}
+
+
+/* Celular */
+
+@media(max-width:768px){
+
+    .painel-notificacoes{
+
+        width:95%;
+        left:2.5%;
+        right:2.5%;
+        top:65px;
+        height:70vh;
+
+    }
 
 }

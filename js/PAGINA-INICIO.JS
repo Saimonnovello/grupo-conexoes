@@ -107,9 +107,20 @@ const sino = document.querySelector(".notificacao");
 const painel = document.getElementById("painelNotificacoes");
 const badge = document.getElementById("badgeNotificacao");
 
+
+
+if(localStorage.getItem("notificacoesLidas") == "nao"){
+
+    badge.style.display = "flex";
+
+}else{
+
+    badge.style.display = "none";
+
+}
+
 // Ao entrar na página considera as notificações como lidas
-badge.style.display = "none";
-localStorage.setItem("notificacoesLidas", "sim");
+
 
 sino.onclick = () => {
 
@@ -180,6 +191,8 @@ supabaseClient
         table: "relatorios"
     },
     () => {
+
+        console.log("Novo relatório recebido pelo Realtime");
 
         carregarTotalRelatorios();
 
@@ -271,20 +284,6 @@ if(localStorage.getItem("notificacoesLidas") == "sim"){
     badge.style.display = "flex";
 
 }
-
-
-
-
-
-
-
-
-window.addEventListener("beforeunload", () => {
-
-    localStorage.setItem("notificacoesLidas","sim");
-
-});
-
 
 
 

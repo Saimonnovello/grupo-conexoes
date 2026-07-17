@@ -1,0 +1,182 @@
+/* CARD DE INFORMAÇÕES */
+
+.info-relatorio{
+
+    background:#1E293B;
+    border-radius:20px;
+    padding:30px;
+    margin-bottom:35px;
+    box-shadow:0 12px 25px rgba(0,0,0,.20);
+
+}
+
+.info-relatorio h2{
+
+    font-size:34px;
+    color:#FFFFFF;
+    margin-bottom:12px;
+
+}
+
+.info-relatorio h3{
+
+    font-size:24px;
+    color:#60A5FA;
+
+}
+
+
+
+/* CARDS DAS PERGUNTAS */
+
+.pergunta{
+
+    background:#1E293B;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    margin-bottom:22px;
+
+    border-left:6px solid #2563EB;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.18);
+
+    transition:.25s;
+
+}
+
+.pergunta:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.pergunta strong{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    font-size:23px;
+
+    color:#60A5FA;
+
+    margin-bottom:18px;
+
+}
+
+.pergunta p{
+
+    font-size:20px;
+
+    color:#F8FAFC;
+
+    line-height:1.8;
+
+    word-break:break-word;
+
+}
+
+
+
+/* CELULAR */
+
+@media(max-width:768px){
+
+.info-relatorio{
+
+    padding:22px;
+
+}
+
+.info-relatorio h2{
+
+    font-size:28px;
+
+}
+
+.info-relatorio h3{
+
+    font-size:20px;
+
+}
+
+.pergunta{
+
+    padding:20px;
+
+    margin-bottom:18px;
+
+}
+
+.pergunta strong{
+
+    font-size:18px;
+
+}
+
+.pergunta p{
+
+    font-size:17px;
+
+}
+
+}
+
+
+
+.pergunta{
+    background:#1E293B;
+    border-radius:16px;
+    padding:22px;
+    margin-bottom:22px;
+    border-left:5px solid #2563EB;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.titulo-pergunta{
+    font-size:22px;
+    font-weight:700;
+    color:#60A5FA;
+    margin-bottom:12px;
+}
+
+.resposta{
+    font-size:19px;
+    color:#F8FAFC;
+    line-height:1.8;
+    word-break:break-word;
+}
+
+body:not(.dark) .pergunta{
+    background:#FFFFFF;
+}
+
+body:not(.dark) .titulo-pergunta{
+    color:#2563EB;
+}
+
+body:not(.dark) .resposta{
+    color:#334155;
+}
+
+@media(max-width:768px){
+
+    .pergunta{
+        padding:18px;
+        margin-bottom:18px;
+    }
+
+    .titulo-pergunta{
+        font-size:18px;
+    }
+
+    .resposta{
+        font-size:17px;
+    }
+
+}
