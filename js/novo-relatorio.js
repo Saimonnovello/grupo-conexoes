@@ -82,16 +82,23 @@ async function salvarRelatorio() {
 
     console.log("Enviando:", respostas);
 
+   const usuarioLogado = localStorage.getItem("usuarioLogado");
+
     const { data, error } = await supabaseClient
-        .from("relatorios")
-        .insert([
-            {
-                data_gc: document.getElementById("data_gc").value,
-                coordenador: coordenador,
-                respostas: respostas,
-                status: document.getElementById("status").value
-            }
-        ]);
+    .from("relatorios")
+    .insert([
+        {
+            data_gc: document.getElementById("data_gc").value,
+
+            coordenador: coordenador,
+
+            usuario_criador: usuarioLogado,
+
+            respostas: respostas,
+
+            status: document.getElementById("status").value
+        }
+    ]);
 
     if (error) {
         console.error("Erro Supabase:", error);

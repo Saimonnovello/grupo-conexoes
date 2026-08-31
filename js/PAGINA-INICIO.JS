@@ -1,11 +1,46 @@
+// ==========================================
+// DADOS DO USUÁRIO LOGADO
+// ==========================================
+
+const usuarioLogado = localStorage.getItem("usuarioLogado");
+const tipoUsuario = localStorage.getItem("tipoUsuario");
+
+console.log("Usuário logado:", usuarioLogado);
+console.log("Tipo:", tipoUsuario);
+
+
+// ==========================================
+// FUNÇÃO PARA FILTRAR RELATÓRIOS
+// ==========================================
+
+function aplicarFiltroUsuario(query) {
+
+    // ADMIN PODE VER TODOS
+    if (tipoUsuario === "admin") {
+        return query;
+    }
+
+    // USUÁRIO NORMAL VÊ SOMENTE OS SEUS
+    return query.eq("usuario_criador", usuarioLogado);
+}
+
+
+// ==========================================
+// TOTAL DE RELATÓRIOS
+// ==========================================
+
 async function carregarTotalRelatorios() {
 
-    const { data, error } = await supabaseClient
+    let query = supabaseClient
         .from("relatorios")
         .select("id");
 
+    query = aplicarFiltroUsuario(query);
+
+    const { data, error } = await query;
+
     if (error) {
-        console.error(error);
+        console.error("Erro total relatórios:", error);
         return;
     }
 
@@ -15,11 +50,9 @@ async function carregarTotalRelatorios() {
 carregarTotalRelatorios();
 
 
-// ==========================
-// PERMISSÕES
-// ==========================
-
-const tipoUsuario = localStorage.getItem("tipoUsuario");
+// ==========================================
+// PERMISSÕES DO MENU
+// ==========================================
 
 const menuDesktop = document.getElementById("menuUsuarios");
 const menuMobile = document.getElementById("usuariosMobile");
@@ -37,9 +70,9 @@ if (tipoUsuario !== "admin") {
 }
 
 
-// ==========================
+// ==========================================
 // MODO ESCURO
-// ==========================
+// ==========================================
 
 const temaBtn = document.querySelector(".tema-btn");
 
@@ -49,37 +82,48 @@ if (tema === "dark") {
     document.body.classList.add("dark");
 }
 
-temaBtn.onclick = function () {
+if (temaBtn) {
 
-    document.body.classList.toggle("dark");
+    temaBtn.onclick = function () {
 
-    if (document.body.classList.contains("dark")) {
-        localStorage.setItem("tema", "dark");
-    } else {
-        localStorage.setItem("tema", "light");
-    }
+        document.body.classList.toggle("dark");
 
-};
+        if (document.body.classList.contains("dark")) {
+            localStorage.setItem("tema", "dark");
+        } else {
+            localStorage.setItem("tema", "light");
+        }
+
+    };
+
+}
 
 
-// ==========================
+// ==========================================
 // ÚLTIMOS RELATÓRIOS
-// ==========================
+// ==========================================
 
 async function carregarUltimosRelatorios() {
 
-    const { data, error } = await supabaseClient
+    let query = supabaseClient
         .from("relatorios")
-        .select("*")
+        .select("*");
+
+    query = aplicarFiltroUsuario(query);
+
+    const { data, error } = await query
         .order("created_at", { ascending: false })
         .limit(3);
 
     if (error) {
-        console.error(error);
+        console.error("Erro últimos relatórios:", error);
         return;
     }
 
     const tabela = document.getElementById("listaInicio");
+
+    if (!tabela) return;
+
     tabela.innerHTML = "";
 
     data.forEach(relatorio => {
@@ -98,71 +142,90 @@ async function carregarUltimosRelatorios() {
                 <td>${status}</td>
             </tr>
         `;
+
     });
+
 }
 
 carregarUltimosRelatorios();
+
+
+// ==========================================
+// NOTIFICAÇÕES
+// ==========================================
 
 const sino = document.querySelector(".notificacao");
 const painel = document.getElementById("painelNotificacoes");
 const badge = document.getElementById("badgeNotificacao");
 
 
+if (badge) {
 
-if(localStorage.getItem("notificacoesLidas") == "nao"){
-
-    badge.style.display = "flex";
-
-}else{
-
-    badge.style.display = "none";
-
-}
-
-// Ao entrar na página considera as notificações como lidas
-
-
-sino.onclick = () => {
-
-    painel.classList.toggle("ativo");
-
-    badge.style.display = "none";
-
-    localStorage.setItem("notificacoesLidas","sim");
+    if (localStorage.getItem("notificacoesLidas") === "nao") {
+        badge.style.display = "flex";
+    } else {
+        badge.style.display = "none";
+    }
 
 }
 
 
+if (sino && painel && badge) {
+
+    sino.onclick = () => {
+
+        painel.classList.toggle("ativo");
+
+        badge.style.display = "none";
+
+        localStorage.setItem("notificacoesLidas", "sim");
+
+    };
+
+}
 
 
-async function carregarNotificacoes(){
+// ==========================================
+// CARREGAR NOTIFICAÇÕES
+// ==========================================
 
-    const { data, error } = await supabaseClient
+async function carregarNotificacoes() {
+
+    let query = supabaseClient
         .from("relatorios")
-        .select("status, coordenador, created_at")
-        .order("created_at",{ascending:false})
+        .select("status, coordenador, created_at");
+
+    query = aplicarFiltroUsuario(query);
+
+    const { data, error } = await query
+        .order("created_at", { ascending: false })
         .limit(20);
 
-    if(error){
-        console.log(error);
+    if (error) {
+        console.error("Erro notificações:", error);
         return;
     }
 
-    document.getElementById("badgeNotificacao").textContent = data.length;
+    if (badge) {
+        badge.textContent = data.length;
+    }
 
     const lista = document.getElementById("listaNotificacoes");
 
+    if (!lista) return;
+
     lista.innerHTML = "";
 
-    data.forEach(relatorio=>{
+    data.forEach(relatorio => {
 
-      const tempo = tempoDecorrido(relatorio.created_at);
+        const tempo = tempoDecorrido(relatorio.created_at);
 
         lista.innerHTML += `
+
             <div class="item-notificacao">
 
                 <strong>
-                    ${relatorio.status=="Pendente" ? "🟡" : "🟢"}
+                    ${relatorio.status === "Pendente" ? "🟡" : "🟢"}
                     ${relatorio.status}
                 </strong>
 
@@ -171,43 +234,19 @@ async function carregarNotificacoes(){
                 <span>${tempo}</span>
 
             </div>
+
         `;
 
     });
 
 }
 
+carregarNotificacoes();
 
 
-
-supabaseClient
-.channel("dashboard")
-
-.on(
-    "postgres_changes",
-    {
-        event: "*",
-        schema: "public",
-        table: "relatorios"
-    },
-    () => {
-
-        console.log("Novo relatório recebido pelo Realtime");
-
-        carregarTotalRelatorios();
-
-        carregarUltimosRelatorios();
-
-        carregarPendentes();
-
-        carregarNotificacoes();
-
-    }
-
-)
-
-.subscribe();
-
+// ==========================================
+// TEMPO DECORRIDO
+// ==========================================
 
 function tempoDecorrido(data) {
 
@@ -216,28 +255,33 @@ function tempoDecorrido(data) {
 
     const segundos = Math.floor((agora - criado) / 1000);
 
-    if (segundos < 60)
+    if (segundos < 60) {
         return "Agora";
+    }
 
     const minutos = Math.floor(segundos / 60);
 
-    if (minutos < 60)
+    if (minutos < 60) {
         return `há ${minutos} min`;
+    }
 
     const horas = Math.floor(minutos / 60);
 
-    if (horas < 24)
+    if (horas < 24) {
         return `há ${horas} hora${horas > 1 ? "s" : ""}`;
+    }
 
     const dias = Math.floor(horas / 24);
 
-    if (dias < 30)
+    if (dias < 30) {
         return `há ${dias} dia${dias > 1 ? "s" : ""}`;
+    }
 
     const meses = Math.floor(dias / 30);
 
-    if (meses < 12)
+    if (meses < 12) {
         return `há ${meses} mês${meses > 1 ? "es" : ""}`;
+    }
 
     const anos = Math.floor(meses / 12);
 
@@ -246,47 +290,43 @@ function tempoDecorrido(data) {
 }
 
 
-
-
-
-carregarNotificacoes();
-
+// ==========================================
+// RELATÓRIOS PENDENTES
+// ==========================================
 
 async function carregarPendentes() {
 
-    const { count, error } = await supabaseClient
+    let query = supabaseClient
         .from("relatorios")
-        .select("*", { count: "exact", head: true })
+        .select("*", {
+            count: "exact",
+            head: true
+        })
         .eq("status", "Pendente");
 
+    query = aplicarFiltroUsuario(query);
+
+    const { count, error } = await query;
+
     if (error) {
-        console.error(error);
+        console.error("Erro pendentes:", error);
         return;
     }
 
-    document.getElementById("pendentes").textContent = count;
+    const campoPendentes = document.getElementById("pendentes");
+
+    if (campoPendentes) {
+        campoPendentes.textContent = count || 0;
+    }
 
 }
-
 
 carregarPendentes();
 
 
-
-
-
-if(localStorage.getItem("notificacoesLidas") == "sim"){
-
-    badge.style.display = "none";
-
-}else{
-
-    badge.style.display = "flex";
-
-}
-
-
-
+// ==========================================
+// RELATÓRIOS DESTE MÊS
+// ==========================================
 
 async function carregarRelatoriosMes() {
 
@@ -295,27 +335,28 @@ async function carregarRelatoriosMes() {
     const mesAtual = hoje.getMonth() + 1;
     const anoAtual = hoje.getFullYear();
 
-    console.log("Mês atual:", mesAtual);
-    console.log("Ano atual:", anoAtual);
-
-    const { data, error } = await supabaseClient
+    let query = supabaseClient
         .from("relatorios")
         .select("data_gc");
 
+    query = aplicarFiltroUsuario(query);
+
+    const { data, error } = await query;
+
     if (error) {
-        console.error(error);
+        console.error("Erro relatórios do mês:", error);
         return;
     }
-
-    console.log(data);
 
     let total = 0;
 
     data.forEach(relatorio => {
 
-        const [ano, mes] = relatorio.data_gc.split("-").map(Number);
+        if (!relatorio.data_gc) return;
 
-        console.log(relatorio.data_gc, ano, mes);
+        const [ano, mes] = relatorio.data_gc
+            .split("-")
+            .map(Number);
 
         if (ano === anoAtual && mes === mesAtual) {
             total++;
@@ -323,10 +364,49 @@ async function carregarRelatoriosMes() {
 
     });
 
-    console.log("Total:", total);
+    const campoMes = document.getElementById("relatoriosMes");
 
-    document.getElementById("relatoriosMes").textContent = total;
+    if (campoMes) {
+        campoMes.textContent = total;
+    }
 
 }
 
 carregarRelatoriosMes();
+
+
+// ==========================================
+// REALTIME
+// ==========================================
+
+supabaseClient
+    .channel("dashboard")
+
+    .on(
+        "postgres_changes",
+        {
+            event: "*",
+            schema: "public",
+            table: "relatorios"
+        },
+
+        () => {
+
+            console.log("Alteração recebida pelo Realtime");
+
+            carregarTotalRelatorios();
+
+            carregarUltimosRelatorios();
+
+            carregarPendentes();
+
+            carregarNotificacoes();
+
+            carregarRelatoriosMes();
+
+        }
+
+    )
+
+    .subscribe();
+

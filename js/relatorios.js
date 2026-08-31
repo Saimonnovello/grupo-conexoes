@@ -85,10 +85,33 @@ if (tipo !== "admin") {
 
 async function carregarRelatorios() {
 
-    const { data, error } = await supabaseClient
-        .from("relatorios")
-        .select("*")
-        .order("id", { ascending: false });
+    const usuarioLogado = localStorage.getItem("usuarioLogado");
+
+const tipoUsuario = localStorage.getItem("tipoUsuario");
+
+let consulta = supabaseClient
+    .from("relatorios")
+    .select("*")
+    .order("id", { ascending: false });
+
+
+// =======================================
+// ADMIN VÊ TODOS
+// =======================================
+
+if (tipoUsuario !== "admin") {
+
+    consulta = consulta.eq(
+        "usuario_criador",
+        usuarioLogado
+    );
+
+}
+
+
+// EXECUTA CONSULTA
+
+const { data, error } = await consulta;
 
     if (error) {
         console.error(error);
