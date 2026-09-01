@@ -160,7 +160,6 @@ if (relatorio.status === "Enviado") {
 }
 
         tabela.innerHTML += `
-            <tr>
                 <td>${dataBR}</td>
                 <td>${relatorio.coordenador}</td>
                 <td>${status}</td>
@@ -242,26 +241,45 @@ async function carregarNotificacoes() {
 
     data.forEach(relatorio => {
 
-        const tempo = tempoDecorrido(relatorio.created_at);
+    const tempo = tempoDecorrido(relatorio.created_at);
 
-        lista.innerHTML += `
+    let emojiStatus = "";
 
-            <div class="item-notificacao">
+    if (relatorio.status === "Enviado") {
 
-                <strong>
-                    ${relatorio.status === "Pendente" ? "🟡" : "🟢"}
-                    ${relatorio.status}
-                </strong>
+        emojiStatus = "📤";
 
-                <div>${relatorio.coordenador}</div>
+    } else if (relatorio.status === "Conferido") {
 
-                <span>${tempo}</span>
+        emojiStatus = "🔍";
 
-            </div>
+    } else if (relatorio.status === "Concluído") {
 
-        `;
+        emojiStatus = "✅";
 
-    });
+    } else {
+
+        emojiStatus = "📋";
+
+    }
+
+    lista.innerHTML += `
+
+        <div class="item-notificacao">
+
+            <strong>
+                ${emojiStatus} ${relatorio.status}
+            </strong>
+
+            <div>${relatorio.coordenador}</div>
+
+            <span>${tempo}</span>
+
+        </div>
+
+    `;
+
+});
 
 }
 
