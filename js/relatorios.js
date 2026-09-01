@@ -18,9 +18,33 @@ async function carregarRelatorios() {
         const [ano, mes, dia] = relatorio.data_gc.split("-");
         const dataBR = `${dia}/${mes}/${ano}`;
 
-        const status = relatorio.status === "Pendente"
-            ? '<span class="status-pendente">🟡 Pendente</span>'
-            : '<span class="status-concluido">🟢 Concluído</span>';
+        let status = "";
+
+if (relatorio.status === "Enviado") {
+
+    status = `
+        <span class="status-enviado">
+            📤 Enviado
+        </span>
+    `;
+
+} else if (relatorio.status === "Conferido") {
+
+    status = `
+        <span class="status-conferido">
+            🔍 Conferido
+        </span>
+    `;
+
+} else {
+
+    status = `
+        <span class="status-concluido">
+            ✅ Concluído
+        </span>
+    `;
+
+}
 
         tabela.innerHTML += `
             <tr>
@@ -134,9 +158,33 @@ const { data, error } = await consulta;
         const [ano, mes, dia] = relatorio.data_gc.split("-");
         const dataBR = `${dia}/${mes}/${ano}`;
 
-        const status = relatorio.status === "Pendente"
-            ? '<span class="status-pendente">🟡 Pendente</span>'
-            : '<span class="status-concluido">🟢 Concluído</span>';
+        let status = "";
+
+if (relatorio.status === "Enviado") {
+
+    status = `
+        <span class="status-enviado">
+            📤 Enviado
+        </span>
+    `;
+
+} else if (relatorio.status === "Conferido") {
+
+    status = `
+        <span class="status-conferido">
+            🔍 Conferido
+        </span>
+    `;
+
+} else {
+
+    status = `
+        <span class="status-concluido">
+            ✅ Concluído
+        </span>
+    `;
+
+}
 
         // ===== CELULAR =====
         if(celular && cards){

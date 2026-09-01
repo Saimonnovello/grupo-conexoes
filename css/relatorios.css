@@ -312,3 +312,37 @@ body.dark .card-relatorio h3{
     }
 
 }
+
+
+
+
+
+.status-enviado {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-conferido {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    background: #cfe2ff;
+    color: #084298;
+}
+
+.status-concluido {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    background: #d1e7dd;
+    color: #0f5132;
+}
