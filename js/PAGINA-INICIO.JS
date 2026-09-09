@@ -198,6 +198,10 @@ const sino = document.querySelector(".notificacao");
 const painel = document.getElementById("painelNotificacoes");
 const badge = document.getElementById("badgeNotificacao");
 
+// ==========================================
+// CLICAR NO SINO
+// ==========================================
+
 if (sino && painel && badge) {
 
     sino.onclick = () => {
@@ -211,12 +215,12 @@ if (sino && painel && badge) {
             "sim"
         );
 
-        // Atualiza os tempos das notificações
         carregarNotificacoes();
 
     };
 
 }
+
 
 if (badge) {
 
@@ -228,20 +232,6 @@ if (badge) {
 
 }
 
-
-if (sino && painel && badge) {
-
-    sino.onclick = () => {
-
-        painel.classList.toggle("ativo");
-
-        badge.style.display = "none";
-
-        localStorage.setItem("notificacoesLidas", "sim");
-
-    };
-
-}
 
 
 // ==========================================
@@ -461,6 +451,10 @@ carregarRelatoriosMes();
 // REALTIME
 // ==========================================
 
+// ==========================================
+// REALTIME
+// ==========================================
+
 supabaseClient
     .channel("dashboard")
 
@@ -476,28 +470,141 @@ supabaseClient
 
             console.log("🔔 NOVO RELATÓRIO:", payload);
 
-            // Marca que existe uma nova notificação
+
+            // ==========================================
+            // QUEM CRIOU O RELATÓRIO
+            // ==========================================
+
+            const criador =
+                payload.new.usuario_criador;
+
+
+            console.log(
+                "Criador do relatório:",
+                criador
+            );
+
+
+            // ==========================================
+            // VERIFICAR SE ESTE USUÁRIO DEVE RECEBER
+            // A NOTIFICAÇÃO
+            // ==========================================
+
+            let deveReceber = false;
+
+
+            // ==========================================
+            // ADMIN
+            // ==========================================
+
+            if (tipoUsuario === "admin") {
+
+                deveReceber = true;
+            }
+
+
+            // ==========================================
+            // PASTOR RAFAEL
+            // Uiliam + Matheus + Guilherme
+            // ==========================================
+
+            else if (usuarioLogado === "Rafael") {
+
+                if (
+                    [
+                        "Uiliam",
+                        "Matheus",
+                        "Guilherme"
+                    ].includes(criador)
+                ) {
+
+                    deveReceber = true;
+                }
+            }
+
+
+            // ==========================================
+            // PASTOR PAULO
+            // PauloM + Marciel
+            // ==========================================
+
+            else if (usuarioLogado === "Pr.Paulo") {
+
+                if (
+                    [
+                        "PauloM",
+                        "Marciel"
+                    ].includes(criador)
+                ) {
+
+                    deveReceber = true;
+                }
+            }
+
+
+            // ==========================================
+            // USUÁRIO NORMAL
+            // ==========================================
+
+            else {
+
+                if (criador === usuarioLogado) {
+
+                    deveReceber = true;
+                }
+            }
+
+
+            // ==========================================
+            // SE NÃO FOR O DESTINATÁRIO,
+            // NÃO FAZ NADA
+            // ==========================================
+
+            if (!deveReceber) {
+
+                console.log(
+                    "🔕 Este usuário não deve receber esta notificação."
+                );
+
+                return;
+            }
+
+
+            // ==========================================
+            // MARCAR COMO NÃO LIDA
+            // ==========================================
+
             localStorage.setItem(
                 "notificacoesLidas",
                 "nao"
             );
 
-            // Mostra a bolinha vermelha
+
+            // ==========================================
+            // MOSTRAR BOLINHA VERMELHA
+            // ==========================================
+
             if (badge) {
 
                 badge.textContent = "1";
-                badge.style.display = "flex";
 
+                badge.style.display = "flex";
             }
 
-            // Atualiza os dados da tela
+
+            // ==========================================
+            // ATUALIZAR DASHBOARD
+            // ==========================================
+
             carregarTotalRelatorios();
+
             carregarUltimosRelatorios();
+
             carregarNotificacoes();
+
             carregarRelatoriosMes();
 
         }
-
     )
 
     .subscribe((status) => {
