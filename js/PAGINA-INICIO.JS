@@ -15,12 +15,29 @@ console.log("Tipo:", tipoUsuario);
 
 function aplicarFiltroUsuario(query) {
 
-    // ADMIN PODE VER TODOS
+    // Administradores continuam vendo tudo
     if (tipoUsuario === "admin") {
         return query;
     }
 
-    // USUÁRIO NORMAL VÊ SOMENTE OS SEUS
+    // Pastor Rafa vê Uill, Matheus e Guilherme
+    if (usuarioLogado === "Rafael") {
+        return query.in("usuario_criador", [
+            "Uiliam",
+            "Matheus",
+            "Guilherme"
+        ]);
+    }
+
+    // Pastor Paulo vê Paulo e Marciel
+    if (usuarioLogado === "Pr.Paulo") {
+        return query.in("usuario_criador", [
+            "PauloM",
+            "Marciel"
+        ]);
+    }
+
+    // Usuário comum vê somente os próprios relatórios
     return query.eq("usuario_criador", usuarioLogado);
 }
 
@@ -181,6 +198,25 @@ const sino = document.querySelector(".notificacao");
 const painel = document.getElementById("painelNotificacoes");
 const badge = document.getElementById("badgeNotificacao");
 
+if (sino && painel && badge) {
+
+    sino.onclick = () => {
+
+        painel.classList.toggle("ativo");
+
+        badge.style.display = "none";
+
+        localStorage.setItem(
+            "notificacoesLidas",
+            "sim"
+        );
+
+        // Atualiza os tempos das notificações
+        carregarNotificacoes();
+
+    };
+
+}
 
 if (badge) {
 
@@ -229,10 +265,6 @@ async function carregarNotificacoes() {
         return;
     }
 
-    if (badge) {
-        badge.textContent = data.length;
-    }
-
     const lista = document.getElementById("listaNotificacoes");
 
     if (!lista) return;
@@ -241,45 +273,49 @@ async function carregarNotificacoes() {
 
     data.forEach(relatorio => {
 
-    const tempo = tempoDecorrido(relatorio.created_at);
+        const tempo = tempoDecorrido(relatorio.created_at);
 
-    let emojiStatus = "";
+        let emojiStatus = "";
 
-    if (relatorio.status === "Enviado") {
+        if (relatorio.status === "Enviado") {
 
-        emojiStatus = "📤";
+            emojiStatus = "📤";
 
-    } else if (relatorio.status === "Conferido") {
+        } else if (relatorio.status === "Conferido") {
 
-        emojiStatus = "🔍";
+            emojiStatus = "🔍";
 
-    } else if (relatorio.status === "Concluído") {
+        } else if (relatorio.status === "Concluído") {
 
-        emojiStatus = "✅";
+            emojiStatus = "✅";
 
-    } else {
+        } else {
 
-        emojiStatus = "📋";
+            emojiStatus = "📋";
 
-    }
+        }
 
-    lista.innerHTML += `
+        lista.innerHTML += `
 
-        <div class="item-notificacao">
+            <div class="item-notificacao">
 
-            <strong>
-                ${emojiStatus} ${relatorio.status}
-            </strong>
+                <strong>
+                    ${emojiStatus} ${relatorio.status}
+                </strong>
 
-            <div>${relatorio.coordenador}</div>
+                <div>
+                    ${relatorio.coordenador}
+                </div>
 
-            <span>${tempo}</span>
+                <span>
+                    ${tempo}
+                </span>
 
-        </div>
+            </div>
 
-    `;
+        `;
 
-});
+    });
 
 }
 
@@ -291,46 +327,50 @@ carregarNotificacoes();
 // ==========================================
 
 function tempoDecorrido(data) {
-
     const agora = new Date();
     const criado = new Date(data);
 
-    const segundos = Math.floor((agora - criado) / 1000);
+    const diferencaSegundos = Math.floor((agora - criado) / 1000);
 
-    if (segundos < 60) {
+    // Menos de 1 minuto
+    if (diferencaSegundos < 60) {
         return "Agora";
     }
 
-    const minutos = Math.floor(segundos / 60);
+    const minutosTotais = Math.floor(diferencaSegundos / 60);
 
-    if (minutos < 60) {
-        return `há ${minutos} min`;
+    const dias = Math.floor(minutosTotais / 1440);
+    const horas = Math.floor((minutosTotais % 1440) / 60);
+    const minutos = minutosTotais % 60;
+
+    // Menos de 24 horas
+    if (dias === 0) {
+        if (horas === 0) {
+            return `${minutos} min`;
+        }
+
+        if (minutos === 0) {
+            return `${horas} hora${horas > 1 ? "s" : ""}`;
+        }
+
+        return `${horas} hora${horas > 1 ? "s" : ""} e ${minutos} min`;
     }
 
-    const horas = Math.floor(minutos / 60);
-
-    if (horas < 24) {
-        return `há ${horas} hora${horas > 1 ? "s" : ""}`;
+    // 24 horas ou mais
+    if (horas === 0 && minutos === 0) {
+        return `${dias} dia${dias > 1 ? "s" : ""}`;
     }
 
-    const dias = Math.floor(horas / 24);
-
-    if (dias < 30) {
-        return `há ${dias} dia${dias > 1 ? "s" : ""}`;
+    if (horas === 0) {
+        return `${dias} dia${dias > 1 ? "s" : ""} e ${minutos} min`;
     }
 
-    const meses = Math.floor(dias / 30);
-
-    if (meses < 12) {
-        return `há ${meses} mês${meses > 1 ? "es" : ""}`;
+    if (minutos === 0) {
+        return `${dias} dia${dias > 1 ? "s" : ""} e ${horas} hora${horas > 1 ? "s" : ""}`;
     }
 
-    const anos = Math.floor(meses / 12);
-
-    return `há ${anos} ano${anos > 1 ? "s" : ""}`;
-
+    return `${dias} dia${dias > 1 ? "s" : ""}, ${horas} hora${horas > 1 ? "s" : ""} e ${minutos} min`;
 }
-
 
 // ==========================================
 // RELATÓRIOS PENDENTES
@@ -427,28 +467,45 @@ supabaseClient
     .on(
         "postgres_changes",
         {
-            event: "*",
+            event: "INSERT",
             schema: "public",
             table: "relatorios"
         },
 
-        () => {
+        (payload) => {
 
-            console.log("Alteração recebida pelo Realtime");
+            console.log("🔔 NOVO RELATÓRIO:", payload);
 
+            // Marca que existe uma nova notificação
+            localStorage.setItem(
+                "notificacoesLidas",
+                "nao"
+            );
+
+            // Mostra a bolinha vermelha
+            if (badge) {
+
+                badge.textContent = "1";
+                badge.style.display = "flex";
+
+            }
+
+            // Atualiza os dados da tela
             carregarTotalRelatorios();
-
             carregarUltimosRelatorios();
-
-            carregarPendentes();
-
             carregarNotificacoes();
-
             carregarRelatoriosMes();
 
         }
 
     )
 
-    .subscribe();
+    .subscribe((status) => {
+
+        console.log(
+            "Status Realtime:",
+            status
+        );
+
+    });
 
