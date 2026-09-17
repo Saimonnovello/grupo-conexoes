@@ -33,8 +33,8 @@ function aplicarFiltroUsuario(query) {
     if (usuarioLogado === "Pr.Paulo") {
         return query.in("usuario_criador", [
             "PauloM",
-            "Marciel"
-        ]);
+            "Marciel", 
+            "Leonardo"]);
     }
 
     // Usuário comum vê somente os próprios relatórios
