@@ -249,6 +249,14 @@ async function carregarRelatorios() {
                         ${relatorio.coordenador || "-"}
                     </p>
 
+                    <p>
+    <strong>
+        👨‍💼 Líder:
+    </strong>
+    <br>
+    ${relatorio.usuario_criador || "Não informado"}
+</p>
+
 
                     <p>
                         <strong>
@@ -299,13 +307,20 @@ async function carregarRelatorios() {
 
 
                     <td>
-                        ${relatorio.coordenador || "-"}
-                    </td>
+    ${relatorio.coordenador || "-"}
+</td>
 
 
-                    <td>
-                        ${status}
-                    </td>
+<td>
+    <strong>
+        ${relatorio.usuario_criador || "Não informado"}
+    </strong>
+</td>
+
+
+<td>
+    ${status}
+</td>
 
 
                     <td>
@@ -357,7 +372,7 @@ async function carregarRelatorios() {
 
             tabela.innerHTML = `
                 <tr>
-                    <td colspan="4" style="text-align:center;">
+                    <td colspan="5" style="text-align:center;">
                         📋 Nenhum relatório encontrado.
                     </td>
                 </tr>
