@@ -35,7 +35,8 @@ function aplicarFiltroRelatorios(query) {
         return query.in("usuario_criador", [
             "Uiliam",
             "Matheus",
-            "Guilherme"
+            "Guilherme",
+            "Saimon"
         ]);
     }
 
