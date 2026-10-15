@@ -169,6 +169,39 @@ async function carregarRelatorio() {
 </div>
 `;
 }
+
+
+async function salvarStatusRelatorio() {
+    const id = localStorage.getItem("relatorioSelecionado");
+    const novoStatus = document.getElementById("novoStatus").value;
+
+    if (!id) {
+        alert("Não foi possível identificar o relatório.");
+        return;
+    }
+
+    const confirmar = confirm(
+        `Deseja alterar o status para "${novoStatus}"?`
+    );
+
+    if (!confirmar) return;
+
+    const { error } = await supabaseClient
+        .from("relatorios")
+        .update({ status: novoStatus })
+        .eq("id", id);
+
+    if (error) {
+        console.error("Erro ao atualizar status:", error);
+        alert("Não foi possível salvar. Verifique as permissões do Supabase.");
+        return;
+    }
+
+    alert("Status atualizado com sucesso!");
+    location.reload();
+}
+
+
 carregarRelatorio();
 
 

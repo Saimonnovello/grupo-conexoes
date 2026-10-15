@@ -29,6 +29,29 @@ body.dark .detalhes-card{background:#1E293B;color:#fff}
 <div class="topo"><div class="titulo"><h1>Detalhes do Relatório</h1><p>Visualize todas as respostas cadastradas.</p></div></div>
 <section class="detalhes-card">
 <div id="dadosRelatorio"></div>
+
+<div class="controle-status" style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #ddd;">
+
+    <h3>Atualizar status do relatório</h3>
+
+    <label for="novoStatus">Status:</label>
+
+    <select id="novoStatus" style="display:block; width:100%; max-width:350px; padding:12px; margin:10px 0 15px; border-radius:8px;">
+        <option value="Enviado">📤 Enviado</option>
+        <option value="Conferido">🔍 Conferido</option>
+        <option value="Concluído">✅ Concluído</option>
+    </select>
+
+    <button
+        type="button"
+        onclick="salvarStatusRelatorio()"
+        style="padding:12px 22px; border:0; border-radius:8px; background:#2563eb; color:white; cursor:pointer; font-weight:bold;"
+    >
+        💾 Salvar status
+    </button>
+
+</div>
+
 </section>
 </main>
 </div>

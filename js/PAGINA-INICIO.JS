@@ -33,7 +33,7 @@ function aplicarFiltroUsuario(query) {
     if (usuarioLogado === "Pr.Paulo") {
         return query.in("usuario_criador", [
             "PauloM",
-            "Marciel", 
+            "Marciel",
             "Leonardo",
             "Jesiel"]);
     }
