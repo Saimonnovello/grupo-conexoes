@@ -1,3 +1,4 @@
+
 // ==========================================
 // DADOS DO USUÁRIO LOGADO
 // ==========================================
@@ -15,23 +16,11 @@ console.log("Tipo:", tipoUsuario);
 
 function aplicarFiltroRelatorios(query) {
 
-    // ==========================================
-    // ADMINISTRADORES
-    // VÊEM TODOS
-    // ==========================================
-
     if (tipoUsuario === "admin") {
         return query;
     }
 
-
-    // ==========================================
-    // PASTOR RAFA
-    // VÊ UILL + MATHEUS + GUILHERME
-    // ==========================================
-
     if (usuarioLogado === "Rafael") {
-
         return query.in("usuario_criador", [
             "Uiliam",
             "Matheus",
@@ -40,14 +29,7 @@ function aplicarFiltroRelatorios(query) {
         ]);
     }
 
-
-    // ==========================================
-    // PASTOR PAULO
-    // VÊ PAULO + MARCIEL
-    // ==========================================
-
     if (usuarioLogado === "Pr.Paulo") {
-
         return query.in("usuario_criador", [
             "PauloM",
             "Marciel",
@@ -56,16 +38,105 @@ function aplicarFiltroRelatorios(query) {
         ]);
     }
 
+    return query.eq("usuario_criador", usuarioLogado);
+}
 
-    // ==========================================
-    // USUÁRIO NORMAL
-    // VÊ SOMENTE OS PRÓPRIOS
-    // ==========================================
 
-    return query.eq(
-        "usuario_criador",
-        usuarioLogado
+// ==========================================
+// VERIFICAR SE O RELATÓRIO ESTÁ ATRASADO
+// ==========================================
+
+function verificarPrazoAtrasado(relatorio) {
+
+    if (relatorio.prazo_status === "Preenchido com atraso") {
+        return true;
+    }
+
+    if (
+        relatorio.preenchido_em &&
+        relatorio.prazo_limite
+    ) {
+        return new Date(relatorio.preenchido_em) >
+               new Date(relatorio.prazo_limite);
+    }
+
+    return false;
+}
+
+
+// ==========================================
+// EXIBIR IDENTIFICAÇÃO DO PRAZO
+// ==========================================
+
+function mostrarPrazo(relatorio) {
+
+    if (verificarPrazoAtrasado(relatorio)) {
+        return `
+            <span style="
+                display: inline-block;
+                background: #fee2e2;
+                color: #b91c1c;
+                padding: 7px 10px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: bold;
+                white-space: nowrap;
+            ">
+                🔴 Preenchido com atraso
+            </span>
+        `;
+    }
+
+    return `
+        <span style="
+            color: #16a34a;
+            font-size: 13px;
+            font-weight: bold;
+        ">
+            No prazo
+        </span>
+    `;
+}
+
+
+// ==========================================
+// ADICIONAR CABEÇALHO PRAZO NA TABELA
+// ==========================================
+
+function adicionarColunaPrazo() {
+
+    const tabela = document.getElementById("listaRelatorios");
+
+    if (!tabela) return;
+
+    const linhaCabecalho = tabela.closest("table")
+        ?.querySelector("thead tr");
+
+    if (!linhaCabecalho) return;
+
+    const cabecalhos = Array.from(
+        linhaCabecalho.querySelectorAll("th")
     );
+
+    const jaExiste = cabecalhos.some(
+        th => th.textContent.trim().toLowerCase() === "prazo"
+    );
+
+    if (jaExiste) return;
+
+    const cabecalhoLider = cabecalhos.find(
+        th => th.textContent.trim().toLowerCase() === "líder"
+    );
+
+    if (cabecalhoLider) {
+        const novoCabecalho = document.createElement("th");
+        novoCabecalho.textContent = "Prazo";
+
+        cabecalhoLider.insertAdjacentElement(
+            "afterend",
+            novoCabecalho
+        );
+    }
 }
 
 
@@ -79,76 +150,38 @@ async function carregarRelatorios() {
         .from("relatorios")
         .select("*");
 
-    // Aplica as regras de acesso
     consulta = aplicarFiltroRelatorios(consulta);
 
-    // Ordena pelos mais recentes
     consulta = consulta.order("id", {
         ascending: false
     });
 
-
     const { data, error } = await consulta;
 
-
     if (error) {
-
-        console.error(
-            "Erro ao carregar relatórios:",
-            error
-        );
-
+        console.error("Erro ao carregar relatórios:", error);
         return;
     }
 
-
-    // ==========================================
-    // ELEMENTOS
-    // ==========================================
-
-    const tabela =
-        document.getElementById(
-            "listaRelatorios"
-        );
-
-    const cards =
-        document.getElementById(
-            "cardsRelatorios"
-        );
-
+    const tabela = document.getElementById("listaRelatorios");
+    const cards = document.getElementById("cardsRelatorios");
 
     if (!tabela) {
-        console.error(
-            "Elemento listaRelatorios não encontrado."
-        );
+        console.error("Elemento listaRelatorios não encontrado.");
         return;
     }
 
-
-    // Limpa tabela
     tabela.innerHTML = "";
 
-
-    // Limpa cards
     if (cards) {
         cards.innerHTML = "";
     }
 
+    adicionarColunaPrazo();
 
-    // ==========================================
-    // VERIFICAR SE É CELULAR
-    // ==========================================
-
-    const celular =
-        window.innerWidth <= 768;
-
-
-    // ==========================================
-    // MOSTRAR RELATÓRIOS
-    // ==========================================
+    const celular = window.innerWidth <= 768;
 
     data.forEach(relatorio => {
-
 
         // ==========================================
         // DATA
@@ -157,18 +190,20 @@ async function carregarRelatorios() {
         let dataBR = "-";
 
         if (relatorio.data_gc) {
-
-            const partes =
-                relatorio.data_gc.split("-");
+            const partes = relatorio.data_gc.split("-");
 
             if (partes.length === 3) {
-
                 const [ano, mes, dia] = partes;
-
-                dataBR =
-                    `${dia}/${mes}/${ano}`;
+                dataBR = `${dia}/${mes}/${ano}`;
             }
         }
+
+
+        // ==========================================
+        // PRAZO
+        // ==========================================
+
+        const prazo = mostrarPrazo(relatorio);
 
 
         // ==========================================
@@ -177,40 +212,25 @@ async function carregarRelatorios() {
 
         let status = "";
 
-
         if (relatorio.status === "Enviado") {
-
             status = `
                 <span class="status-enviado">
                     📤 Enviado
                 </span>
             `;
-
-
-        } else if (
-            relatorio.status === "Conferido"
-        ) {
-
+        } else if (relatorio.status === "Conferido") {
             status = `
                 <span class="status-conferido">
                     🔍 Conferido
                 </span>
             `;
-
-
-        } else if (
-            relatorio.status === "Concluído"
-        ) {
-
+        } else if (relatorio.status === "Concluído") {
             status = `
                 <span class="status-concluido">
                     ✅ Concluído
                 </span>
             `;
-
-
         } else {
-
             status = `
                 <span>
                     ${relatorio.status || "Sem status"}
@@ -226,48 +246,39 @@ async function carregarRelatorios() {
         if (celular && cards) {
 
             cards.innerHTML += `
-
                 <div class="card-relatorio">
 
-                    <h3>
-                        📋 Relatório
-                    </h3>
-
+                    <h3>📋 Relatório</h3>
 
                     <p>
-                        <strong>
-                            📅 Data:
-                        </strong>
+                        <strong>📅 Data:</strong>
                         <br>
                         ${dataBR}
                     </p>
 
-
                     <p>
-                        <strong>
-                            👤 Coordenador:
-                        </strong>
+                        <strong>👤 Coordenador:</strong>
                         <br>
                         ${relatorio.coordenador || "-"}
                     </p>
 
                     <p>
-    <strong>
-        👨‍💼 Líder:
-    </strong>
-    <br>
-    ${relatorio.usuario_criador || "Não informado"}
-</p>
-
+                        <strong>👨‍💼 Líder:</strong>
+                        <br>
+                        ${relatorio.usuario_criador || "Não informado"}
+                    </p>
 
                     <p>
-                        <strong>
-                            Status:
-                        </strong>
+                        <strong>⏰ Prazo:</strong>
+                        <br>
+                        ${prazo}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
                         <br>
                         ${status}
                     </p>
-
 
                     <div class="card-acoes">
 
@@ -277,7 +288,6 @@ async function carregarRelatorios() {
                         >
                             👁 Ver
                         </button>
-
 
                         <button
                             class="btn-editar"
@@ -289,7 +299,6 @@ async function carregarRelatorios() {
                     </div>
 
                 </div>
-
             `;
 
 
@@ -300,30 +309,29 @@ async function carregarRelatorios() {
         } else {
 
             tabela.innerHTML += `
-
                 <tr>
 
                     <td>
                         ${dataBR}
                     </td>
 
+                    <td>
+                        ${relatorio.coordenador || "-"}
+                    </td>
 
                     <td>
-    ${relatorio.coordenador || "-"}
-</td>
+                        <strong>
+                            ${relatorio.usuario_criador || "Não informado"}
+                        </strong>
+                    </td>
 
+                    <td>
+                        ${prazo}
+                    </td>
 
-<td>
-    <strong>
-        ${relatorio.usuario_criador || "Não informado"}
-    </strong>
-</td>
-
-
-<td>
-    ${status}
-</td>
-
+                    <td>
+                        ${status}
+                    </td>
 
                     <td>
 
@@ -333,7 +341,6 @@ async function carregarRelatorios() {
                         >
                             👁 Ver
                         </button>
-
 
                         <button
                             class="btn-editar"
@@ -345,7 +352,6 @@ async function carregarRelatorios() {
                     </td>
 
                 </tr>
-
             `;
         }
 
@@ -374,7 +380,7 @@ async function carregarRelatorios() {
 
             tabela.innerHTML = `
                 <tr>
-                    <td colspan="5" style="text-align:center;">
+                    <td colspan="6" style="text-align:center;">
                         📋 Nenhum relatório encontrado.
                     </td>
                 </tr>
@@ -391,13 +397,9 @@ async function carregarRelatorios() {
 
 function verRelatorio(id) {
 
-    localStorage.setItem(
-        "relatorioSelecionado",
-        id
-    );
+    localStorage.setItem("relatorioSelecionado", id);
 
-    window.location.href =
-        "ver-relatorio.html";
+    window.location.href = "ver-relatorio.html";
 }
 
 
@@ -419,10 +421,7 @@ function editarRelatorio(id) {
 
 if (tipoUsuario !== "admin") {
 
-    const menu =
-        document.getElementById(
-            "menuUsuarios"
-        );
+    const menu = document.getElementById("menuUsuarios");
 
     if (menu) {
         menu.style.display = "none";
@@ -441,7 +440,4 @@ carregarRelatorios();
 // ATUALIZAR AO REDIMENSIONAR
 // ==========================================
 
-window.addEventListener(
-    "resize",
-    carregarRelatorios
-);
+window.addEventListener("resize", carregarRelatorios);
